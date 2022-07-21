@@ -10,7 +10,7 @@ notes.addEventListener("input", function (event) {
 function showTabs(notes) {
   tabs.innerHTML = '';
   for (var i = 0; i < notes.length; i++) {
-    if (notes[i] !== 'c' && notes[i] !== 'd' && notes[i] !== 'e' && notes[i] !== 'f' && notes[i] !== 'g' && notes[i] !== 'a' && notes[i] !== 'b' && notes[i] !== 'C' && notes[i] !== 'D' && notes[i] !== 'E' && notes[i] !== 'F' && notes[i] !== 'G' && notes[i] !== 'A' && notes[i] !== 'B' && notes[i] !== '#' && notes[i] !== '+' && notes[i] !== ' ' && notes[i] !== '\n' && notes[i] !== '-') {
+    if (notes[i] !== 'c' && notes[i] !== 'd' && notes[i] !== 'e' && notes[i] !== 'f' && notes[i] !== 'g' && notes[i] !== 'a' && notes[i] !== 'b' && notes[i] !== 'C' && notes[i] !== 'D' && notes[i] !== 'E' && notes[i] !== 'F' && notes[i] !== 'G' && notes[i] !== 'A' && notes[i] !== 'B' && notes[i] !== ' ' && notes[i] !== '\n' && notes[i] !== '-') {
       elementCreation('error');
     } else {
       if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] == '-' && notes[i + 4] !== '\n') {
