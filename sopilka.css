@@ -15,6 +15,11 @@ body {
   min-height: 100vh;
 }
 
+::selection {
+  background-color: firebrick;
+  color: floralwhite;
+}
+
 h1 {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-weight: normal;
@@ -68,6 +73,11 @@ textarea:focus {
   box-shadow: inset 1px 1px 3px 0 rgba(0, 128, 255, 0.4);
   outline: none;
   color: #004b7e;
+}
+
+textarea::selection {
+  background-color: #08f;
+  color: aliceblue;
 }
 
 #tab {
