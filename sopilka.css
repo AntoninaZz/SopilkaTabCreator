@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
+
 html {
   padding: 0;
   margin: 0;
@@ -94,7 +98,7 @@ footer {
   text-align: right;
 }
 
-footer>em {
+footer > em {
   font-size: large;
 }
 
@@ -114,24 +118,32 @@ figcaption {
 
 h4 {
   font-weight: normal;
-  font-size: 0.8em;
   margin: 0;
+}
+
+header > h4 {
+  font-size: 8.5px;
   color: #888;
 }
 
-header>h4 {
-  font-size: 8.5px;
+#tabs > h4 {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+  color: #000;
 }
 
-#tabs>h3 {
+#tabs > h3 {
+  font-family: 'Comfortaa', sans-serif;
   font-size: 16px;
   margin: 0;
-  color: rgb(21, 21, 21);
+  text-align: center;
 }
 
-#tabs>h2 {
+#tabs > h2 {
+  font-family: 'Bad Script', cursive;
   margin: 0;
-  font-size: 20px;
-  font-weight: lighter;
-  border-bottom: 1px solid #ddd;
+  font-size: 32px;
+  text-align: center;
+  color: #000;
 }
