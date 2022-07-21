@@ -150,3 +150,9 @@ header > h4 {
   text-align: center;
   color: #000;
 }
+
+@media print {
+  header, p, textarea {
+    display: none;
+  }
+}
