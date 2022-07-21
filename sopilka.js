@@ -75,6 +75,7 @@ function showTabs(notes) {
       }
     }
   }
+  spaceCorrection();
 }
 
 function elementCreation(note) {
@@ -129,5 +130,14 @@ function elementCreation(note) {
     tabs.appendChild(figure);
     figure.appendChild(img);
     figure.appendChild(figcaption);
+  }
+}
+
+function spaceCorrection() {
+  var lines = document.getElementsByTagName("br");
+  for(var br of lines){
+    if(br.parentElement.firstElementChild != br && br.previousElementSibling.localName.startsWith('h')) {
+      br.parentElement.removeChild(br);
+    }
   }
 }
