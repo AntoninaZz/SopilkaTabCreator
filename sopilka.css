@@ -152,7 +152,9 @@ header > h4 {
 }
 
 @media print {
-  header, p, textarea {
+  header, 
+  p, 
+  textarea {
     display: none;
   }
 }
