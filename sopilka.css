@@ -5,7 +5,10 @@
 html {
   padding: 0;
   margin: 0;
-  background-image: url('bg-ornament.jpg');
+}
+
+html.bg {
+  background-image: url('./img/bg-ornament.jpg');
   background-size: 30%;
 }
 
@@ -27,11 +30,17 @@ body {
   color: floralwhite;
 }
 
+header {
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
 h1 {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-weight: normal;
   border-bottom: 1px solid #ddd;
   margin-bottom: 0;
+  width: fit-content;
 }
 
 a {
@@ -39,6 +48,10 @@ a {
   text-decoration: none;
   border-bottom: 1px solid #08f;
   font-style: italic;
+}
+
+main p {
+  margin: 0;
 }
 
 kbd {
@@ -66,9 +79,7 @@ textarea {
   line-height: 1.2;
   width: 100%;
   height: 10em;
-  font-family: 'Nanum Gothic', sans-serif;
   font-size: 0.9em;
-  letter-spacing: 0.05em;
   word-spacing: 0;
   color: #555;
   overflow: auto;
@@ -98,22 +109,33 @@ footer {
   font-size: 80%;
   height: 2.7em;
   margin-top: auto;
+  padding-top: 20px;
   text-align: right;
 }
 
-footer > em {
+footer>em {
   font-size: large;
 }
 
-img {
+#tabs img {
   width: 33px;
   height: 150px;
 }
 
 figure {
   display: inline-block;
-  margin: 15px 2.5px;
 }
+
+figure.spacing-0 { margin: 15px 0.5px; }
+figure.spacing-1 { margin: 15px 1px; }
+figure.spacing-2 { margin: 15px 1.5px; }
+figure.spacing-3 { margin: 15px 2px; }
+figure.spacing-4 { margin: 15px 2.5px; }
+figure.spacing-5 { margin: 15px 3px; }
+figure.spacing-6 { margin: 15px 3.5px; }
+figure.spacing-7 { margin: 15px 4px; }
+figure.spacing-8 { margin: 15px 4.5px; }
+figure.spacing-9 { margin: 15px 5px; }
 
 figcaption {
   text-align: center;
@@ -124,26 +146,32 @@ h4 {
   margin: 0;
 }
 
-header > h4 {
+h4#slogan {
   font-size: 8.5px;
   color: #888;
+  width: 100%;
+  text-align: center;
 }
 
-#tabs > h4 {
+h4#slogan.lang-en {
+  font-size: 9.5px;
+}
+
+#tabs>h4 {
   font-family: 'Source Code Pro', monospace;
   font-size: 18px;
   border-bottom: 1px solid #ddd;
   color: #000;
 }
 
-#tabs > h3 {
+#tabs>h3 {
   font-family: 'Comfortaa', sans-serif;
   font-size: 16px;
   margin: 0;
   text-align: center;
 }
 
-#tabs > h2 {
+#tabs>h2 {
   font-family: 'Bad Script', cursive;
   margin: 0;
   font-size: 32px;
@@ -151,10 +179,86 @@ header > h4 {
   color: #000;
 }
 
+select {
+  padding: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: firebrick;
+  border: 1px solid firebrick;
+  border-radius: 3px;
+  outline: none;
+  text-overflow: ellipsis;
+}
+
+select#tune {
+  width: 256px;
+  margin-bottom: 20px;
+}
+
+label[for="tune"] {
+  display: block;
+  font-size: 12px;
+  color:#888;
+  padding: 0 0 5px 5px;
+  margin-top: 20px;
+}
+
+.lang-uk {
+  font-size: 12px;
+}
+
+.menu {
+  width: 50px;
+  position: absolute;
+  top: 35px;
+  right: 10vw;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media print {
-  header, 
-  p, 
+
+  header,
+  p,
+  label, 
+  label[for="tune"], 
+  select,
   textarea {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  #tabs img {
+    width: 22px;
+    height: 100px;
+  }
+
+  .menu {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: flex-end;
+  }
+
+  .menu img {
+    margin-left: 10px;
+  }
+
+  p#description {
+    font-size: 14px;
+  }
+
+  #tabs>h4 {
+    font-size: 14px;
+  }
+
+  figure {
+    margin: 10px 2.5px;
+  }
+
+  h1 {
+    margin-top: 0;
   }
 }
