@@ -1,24 +1,61 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" class="bg">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sopilka Tab Creator</title>
     <link rel="stylesheet" href="sopilka.css">
-    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="popups.css">
+    <link rel="icon" type="image/x-icon" href="./img/icon.png">
 </head>
+
 <body>
+    <div class="menu">
+        <label for="info"><img src="./img/info.svg" alt="info"></label>
+        <input type="checkbox" id="info" onchange="singlePopup(this)">
+        <div class="info popup">
+            <label for="info"><img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon"></label>
+        </div>
+        <label for="settings"><img src="./img/settings.svg" alt="settings"></label>
+        <input type="checkbox" id="settings" onchange="singlePopup(this)">
+        <div class="settings popup">
+            <label for="settings"><img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon"></label>
+            <div class="setting">
+                <label for="lang">Мова</label>
+                <select name="lang" id="lang" onchange="changeLang(this.value)"></select>
+            </div>
+            <div class="setting">
+                <label for="spacing">Spacing</label>
+                <input id="spacing" type="range" min="0" max="9" value="4" oninput="changeSpacing(this)">
+            </div>
+            <div class="setting">
+                <label for="whiteBg">White background</label>
+                <label class="switch">
+                    <input type="checkbox" id="whiteBg" onchange="changeBg(this.checked)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
     <header>
         <h1 lang="en">Sopilka Tab Creator</h1>
-        <h4>Грати на сопілці – легко, навіть без знання нотної грамоти!</h4>
+        <h4 id="slogan">Грати на сопілці – легко, навіть без знання нотної грамоти!</h4>
     </header>
     <main>
-        <p>Для <em>десятидіркової хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для групування нот використовуйте пробіли і переходи на новий рядок, а заголовки, підзаголовки і коментарі можна додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!</p>
-        <textarea id="notes" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false""></textarea>
+        <p id="description">Для <em>десятидіркової хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для
+            позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для
+            групування нот використовуйте пробіли і переходи на новий рядок, а заголовки, підзаголовки і коментарі можна
+            додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!</p>
+        <label for="tune">Мелодія</label>
+        <select name="tune" id="tune" onchange="changeTune()"></select>
+        <textarea id="notes" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
         <div id="tabs"></div>
     </main>
-    <footer lang="en">Sopilka Tab Creator by <a href="https://youtube.com/c/MaggieFilms" target="_blank">Maggie Films</a> <em>☚</em> tutorials & tunes</footer>
+    <footer lang="en">Sopilka Tab Creator by <a href="https://youtube.com/c/MaggieFilms" target="_blank">Maggie
+            Films</a> <em>☚</em> tutorials & tunes</footer>
     <script src="sopilka.js"></script>
 </body>
+
 </html>
