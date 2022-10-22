@@ -1,0 +1,244 @@
+.popup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    padding: 30px;
+    text-align: center;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+#info {
+    display: none;
+}
+
+#settings {
+    display: none;
+}
+
+label[for="info"]:hover,
+label[for="settings"]:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#info:checked~.info {
+    opacity: 1;
+    pointer-events: auto;
+    top: 50%;
+}
+
+#settings:checked~.settings {
+    opacity: 1;
+    pointer-events: auto;
+    top: 50%;
+}
+
+.cancel-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.cancel-icon:hover {
+    opacity: 0.5;
+}
+
+.info {
+    font-size: 14px;
+    text-align: left;
+    align-items: left;
+}
+
+.info header {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    line-height: 20px;
+}
+
+.setting {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.setting label:not(.switch) {
+    margin-right: 20px;
+    text-align: right;
+    width: 48%;
+}
+
+select#lang {
+    width: fit-content;
+}
+
+/* Switch styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #08f;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #08f;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+}
+
+.slider.round {
+    border-radius: 17px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Carousel styles */
+.carouselContent {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    width: 150vw;
+    transition: all 2s;
+}
+
+.slide {
+    width: 30vw;
+    padding: 30px;
+    float: left;
+    box-sizing: border-box;
+}
+
+#slider1:checked~.carouselContent .carousel {
+    margin-left: 0;
+}
+
+#slider2:checked~.carouselContent .carousel {
+    margin-left: -30vw;
+}
+
+#slider3:checked~.carouselContent .carousel {
+    margin-left: -60vw;
+}
+
+#slider4:checked~.carouselContent .carousel {
+    margin-left: -90vw;
+}
+
+#slider5:checked~.carouselContent .carousel {
+    margin-left: -120vw;
+}
+
+#slider1:checked~label[for="slider2"].right::after,
+#slider2:checked~label[for="slider3"].right::after,
+#slider3:checked~label[for="slider4"].right::after,
+#slider4:checked~label[for="slider5"].right::after {
+    content: '﹥';
+    position: fixed;
+    top: 45%;
+    right: 10px;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+#slider5:checked~label[for="slider4"].left::before,
+#slider4:checked~label[for="slider3"].left::before,
+#slider3:checked~label[for="slider2"].left::before,
+#slider2:checked~label[for="slider1"].left::before {
+    content: '﹤';
+    position: fixed;
+    top: 45%;
+    left: 10px;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+/* Carousel navigation styles */
+.carouselNavigation {
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    left: 0;
+    text-align: center;
+}
+
+.navigationButton {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+#slider1:checked~.carouselContent .carouselNavigation label[for="slider1"].navigationButton,
+#slider2:checked~.carouselContent .carouselNavigation label[for="slider2"].navigationButton,
+#slider3:checked~.carouselContent .carouselNavigation label[for="slider3"].navigationButton,
+#slider4:checked~.carouselContent .carouselNavigation label[for="slider4"].navigationButton,
+#slider5:checked~.carouselContent .carouselNavigation label[for="slider5"].navigationButton {
+    background-color: #08f;
+}
