@@ -229,6 +229,28 @@ label[for="tune"] {
   }
 }
 
+@media (max-width: 768px) {
+  #tabs img {
+    width: 27.5px;
+    height: 125px;
+  }
+
+  figure {
+    margin: 10px 2.5px;
+  }
+  
+  figure.spacing-0 { margin: 10px 0.5px; }
+  figure.spacing-1 { margin: 10px 1px; }
+  figure.spacing-2 { margin: 10px 1.5px; }
+  figure.spacing-3 { margin: 10px 2px; }
+  figure.spacing-4 { margin: 10px 2.5px; }
+  figure.spacing-5 { margin: 10px 3px; }
+  figure.spacing-6 { margin: 10px 3.5px; }
+  figure.spacing-7 { margin: 10px 4px; }
+  figure.spacing-8 { margin: 10px 4.5px; }
+  figure.spacing-9 { margin: 10px 5px; }
+}
+
 @media (max-width: 480px) {
   #tabs img {
     width: 22px;
@@ -252,10 +274,6 @@ label[for="tune"] {
 
   #tabs>h4 {
     font-size: 14px;
-  }
-
-  figure {
-    margin: 10px 2.5px;
   }
 
   h1 {
