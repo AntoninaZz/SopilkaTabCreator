@@ -279,6 +279,20 @@ input[type="radio"] {
     }
 }
 
+@media (max-width: 768px) {
+    .info {
+        font-size: 13px;
+    }
+
+    .info header {
+        margin-bottom: 7px;
+    }
+
+    .info p {
+        line-height: 17px;
+    }
+}
+
 @media (max-width: 480px) {
     .popup {
         width: 80%;
