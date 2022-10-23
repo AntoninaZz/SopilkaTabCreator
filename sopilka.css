@@ -261,4 +261,13 @@ label[for="tune"] {
   h1 {
     margin-top: 0;
   }
+
+  h4#slogan {
+    text-align: left;
+  }
+
+  footer {
+    font-size: 60%;
+    padding-bottom: 20px;
+  }
 }
