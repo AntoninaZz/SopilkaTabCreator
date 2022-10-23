@@ -243,6 +243,42 @@ input[type="radio"] {
     background-color: #08f;
 }
 
+@media (max-width: 1024px) {
+    .popup {
+        width: 60%;
+        padding: 30px;
+    }
+
+    .carousel {
+        width: 300vw;
+    }
+
+    .slide {
+        width: 60vw;
+        padding: 30px;
+    }
+
+    #slider2:checked~.carouselContent .carousel {
+        margin-left: -60vw;
+    }
+
+    #slider3:checked~.carouselContent .carousel {
+        margin-left: -120vw;
+    }
+
+    #slider4:checked~.carouselContent .carousel {
+        margin-left: -180vw;
+    }
+
+    #slider5:checked~.carouselContent .carousel {
+        margin-left: -240vw;
+    }
+
+    .info header {
+        font-size: 18px;
+    }
+}
+
 @media (max-width: 480px) {
     .popup {
         width: 80%;
@@ -252,7 +288,7 @@ input[type="radio"] {
     .carousel {
         width: 400vw;
     }
-    
+
     .slide {
         width: 80vw;
         padding: 20px;
@@ -261,15 +297,15 @@ input[type="radio"] {
     #slider2:checked~.carouselContent .carousel {
         margin-left: -80vw;
     }
-    
+
     #slider3:checked~.carouselContent .carousel {
         margin-left: -160vw;
     }
-    
+
     #slider4:checked~.carouselContent .carousel {
         margin-left: -240vw;
     }
-    
+
     #slider5:checked~.carouselContent .carousel {
         margin-left: -320vw;
     }
@@ -277,12 +313,12 @@ input[type="radio"] {
     .info {
         font-size: 12px;
     }
-    
+
     .info header {
         font-size: 16px;
         margin-bottom: 5px;
     }
-    
+
     .info p {
         line-height: 14px;
     }
