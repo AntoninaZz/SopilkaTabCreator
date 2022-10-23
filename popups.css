@@ -242,3 +242,48 @@ input[type="radio"] {
 #slider5:checked~.carouselContent .carouselNavigation label[for="slider5"].navigationButton {
     background-color: #08f;
 }
+
+@media (max-width: 480px) {
+    .popup {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .carousel {
+        width: 400vw;
+    }
+    
+    .slide {
+        width: 80vw;
+        padding: 20px;
+    }
+
+    #slider2:checked~.carouselContent .carousel {
+        margin-left: -80vw;
+    }
+    
+    #slider3:checked~.carouselContent .carousel {
+        margin-left: -160vw;
+    }
+    
+    #slider4:checked~.carouselContent .carousel {
+        margin-left: -240vw;
+    }
+    
+    #slider5:checked~.carouselContent .carousel {
+        margin-left: -320vw;
+    }
+
+    .info {
+        font-size: 12px;
+    }
+    
+    .info header {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    
+    .info p {
+        line-height: 14px;
+    }
+}
