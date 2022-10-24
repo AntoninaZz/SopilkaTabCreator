@@ -127,45 +127,16 @@ figure {
   display: inline-block;
 }
 
-figure.spacing-0 {
-  margin: 15px 0.5px;
-}
-
-figure.spacing-1 {
-  margin: 15px 1px;
-}
-
-figure.spacing-2 {
-  margin: 15px 1.5px;
-}
-
-figure.spacing-3 {
-  margin: 15px 2px;
-}
-
-figure.spacing-4 {
-  margin: 15px 2.5px;
-}
-
-figure.spacing-5 {
-  margin: 15px 3px;
-}
-
-figure.spacing-6 {
-  margin: 15px 3.5px;
-}
-
-figure.spacing-7 {
-  margin: 15px 4px;
-}
-
-figure.spacing-8 {
-  margin: 15px 4.5px;
-}
-
-figure.spacing-9 {
-  margin: 15px 5px;
-}
+figure.spacing-0 { margin: 15px 0.5px; }
+figure.spacing-1 { margin: 15px 1px; }
+figure.spacing-2 { margin: 15px 1.5px; }
+figure.spacing-3 { margin: 15px 2px; }
+figure.spacing-4 { margin: 15px 2.5px; }
+figure.spacing-5 { margin: 15px 3px; }
+figure.spacing-6 { margin: 15px 3.5px; }
+figure.spacing-7 { margin: 15px 4px; }
+figure.spacing-8 { margin: 15px 4.5px; }
+figure.spacing-9 { margin: 15px 5px; }
 
 figcaption {
   text-align: center;
@@ -251,6 +222,7 @@ label[for="tune"] {
   text-align: right;
   width: fit-content;
   float: right;
+  margin-right: 15px;
 }
 
 #saving p {
@@ -293,6 +265,10 @@ label[for="tune"] {
   background-color: rgb(124, 24, 24);
 }
 
+.invisible {
+  display: none;
+}
+
 @media print {
 
   header,
@@ -300,7 +276,8 @@ label[for="tune"] {
   label,
   label[for="tune"],
   select,
-  textarea {
+  textarea,
+  #saving {
     display: none;
   }
 }
@@ -315,45 +292,16 @@ label[for="tune"] {
     margin: 10px 2.5px;
   }
 
-  figure.spacing-0 {
-    margin: 10px 0.5px;
-  }
-
-  figure.spacing-1 {
-    margin: 10px 1px;
-  }
-
-  figure.spacing-2 {
-    margin: 10px 1.5px;
-  }
-
-  figure.spacing-3 {
-    margin: 10px 2px;
-  }
-
-  figure.spacing-4 {
-    margin: 10px 2.5px;
-  }
-
-  figure.spacing-5 {
-    margin: 10px 3px;
-  }
-
-  figure.spacing-6 {
-    margin: 10px 3.5px;
-  }
-
-  figure.spacing-7 {
-    margin: 10px 4px;
-  }
-
-  figure.spacing-8 {
-    margin: 10px 4.5px;
-  }
-
-  figure.spacing-9 {
-    margin: 10px 5px;
-  }
+  figure.spacing-0 { margin: 10px 0.5px; }
+  figure.spacing-1 { margin: 10px 1px; }
+  figure.spacing-2 { margin: 10px 1.5px; }
+  figure.spacing-3 { margin: 10px 2px; }
+  figure.spacing-4 { margin: 10px 2.5px; }
+  figure.spacing-5 { margin: 10px 3px; }
+  figure.spacing-6 { margin: 10px 3.5px; }
+  figure.spacing-7 { margin: 10px 4px; }
+  figure.spacing-8 { margin: 10px 4.5px; }
+  figure.spacing-9 { margin: 10px 5px; }
 }
 
 @media (max-width: 480px) {
