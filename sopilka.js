@@ -318,6 +318,7 @@ if (localStorage.getItem('tune')) {
       notes.value = '';
     }
     showSaving(notes.value);
+    getCurrentName(notes.value);
   } else {
     notesValueChange(tunes[tune.value]);
   }
@@ -498,11 +499,15 @@ function changeTune() {
     notes.value = localStorage.getItem("ownNotes");
     showTabs(notes.value);
     showSaving(notes.value);
-    if (notes.value.split('\n').filter(line => line.startsWith('---')).length>0) {
-      currentName = notes.value.split('\n').filter(line => line.startsWith('---'))[0].slice(3);
-    } else {
-      currentName = '';
-    }
+    getCurrentName(notes.value);
+  }
+}
+
+function getCurrentName(notes) {
+  if (notes.split('\n').filter(line => line.startsWith('---')).length > 0) {
+    currentName = notes.split('\n').filter(line => line.startsWith('---'))[0].slice(3);
+  } else {
+    currentName = '';
   }
 }
 
@@ -560,10 +565,6 @@ function normalizeInput(input) {
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk, notesTranslation[key].en);
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk.toUpperCase(), notesTranslation[key].en.toUpperCase());
       }
-    } else if (lines[i].startsWith('---')) {
-      currentName = lines[i].slice(3);
-    } else {
-      currentName = '';
     }
   }
   let normalizedInput = '';
@@ -575,6 +576,7 @@ function normalizeInput(input) {
     localStorage.setItem("ownNotes", notes.value);
   }
   showTabs(notes.value);
+  getCurrentName(input);
 }
 
 function singlePopup(element) {
@@ -666,7 +668,7 @@ function saveResults() {
       currentName = currentName.replaceAll(';', '');
       currentName = currentName.replaceAll('=', '');
       currentName = currentName.replaceAll(' ', '_');
-      for(let char of currentName) {
+      for (let char of currentName) {
         filename += transliteration[char] || char;
       }
       let link = document.createElement("a");
