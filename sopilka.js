@@ -156,7 +156,7 @@ let contentTranslation = {
   byHand: {
     uk: "Власна мелодія",
     en: "Your own tune"
-  }, 
+  },
   btnSave: {
     uk: "Зберегти",
     en: "Save"
@@ -190,6 +190,98 @@ let infoSlides = {
   },
 }
 
+let transliteration = {
+  "А": "А",
+  "Б": "B",
+  "В": "V",
+  "Г": "G",
+  "Ґ": "G",
+  "Д": "D",
+  "Е": "E",
+  "Є": "Ye",
+  "Ж": "Zh",
+  "З": "Z",
+  "И": "Y",
+  "І": "I",
+  "Ї": "Yi",
+  "Й": "Y",
+  "К": "K",
+  "Л": "L",
+  "М": "M",
+  "Н": "N",
+  "О": "O",
+  "П": "P",
+  "Р": "R",
+  "С": "S",
+  "Т": "T",
+  "У": "U",
+  "Ф": "F",
+  "Х": "H",
+  "Ц": "Ts",
+  "Ч": "Ch",
+  "Ш": "Sh",
+  "Щ": "Sch",
+  "Ь": "'",
+  "Ю": "Yu",
+  "Я": "Ya",
+  "Э": "E",
+  "Ё": "Yo",
+  "Ы": "I",
+  "Ъ": "'",
+  "а": "а",
+  "б": "b",
+  "в": "v",
+  "г": "g",
+  "ґ": "g",
+  "д": "d",
+  "е": "e",
+  "є": "ye",
+  "ж": "zh",
+  "з": "z",
+  "и": "y",
+  "і": "i",
+  "ї": "yi",
+  "й": "y",
+  "к": "k",
+  "л": "l",
+  "м": "m",
+  "н": "n",
+  "о": "o",
+  "п": "p",
+  "р": "r",
+  "с": "s",
+  "т": "t",
+  "у": "u",
+  "ф": "f",
+  "х": "h",
+  "ц": "ts",
+  "ч": "ch",
+  "ш": "sh",
+  "щ": "sch",
+  "ь": "'",
+  "ю": "yu",
+  "я": "ya",
+  "э": "e",
+  "ё": "yo",
+  "ы": "i",
+  "ъ": "'",
+  " ": "_",
+  "/": "",
+  "\\": "",
+  "?": "",
+  "%": "",
+  "*": "",
+  ":": "",
+  "|": "",
+  '"': "",
+  "<": "",
+  ">": "",
+  ".": "",
+  ",": "",
+  ";": "",
+  "=": ""
+};
+
 // main code
 var html = document.getElementsByTagName("html")[0];
 var notes = document.getElementById("notes");
@@ -213,6 +305,7 @@ var labelWhiteBg = document.querySelectorAll('[for="whiteBg"]')[0];
 var infoPopup = document.getElementsByClassName("info")[0];
 let currentLang = 'uk';
 let currentSpacing = 4;
+let currentName = '';
 
 addTuneOptions();
 addLangOptions();
@@ -475,6 +568,8 @@ function normalizeInput(input) {
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk, notesTranslation[key].en);
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk.toUpperCase(), notesTranslation[key].en.toUpperCase());
       }
+    } else if (lines[i].startsWith('---')) {
+      currentName = lines[i].slice(3);
     }
   }
   let normalizedInput = '';
@@ -564,7 +659,7 @@ function saveResults() {
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
-      link.download = "tabs.png";
+      link.download = `${currentName === '' ? 'tabs' : transliterate(currentName)}.png`;
       link.click();
       document.body.removeChild(link);
     });
@@ -574,9 +669,15 @@ function saveResults() {
 }
 
 function showSaving(input) {
-  if(input === '') {
+  if (input === '') {
     saving.setAttribute('class', 'invisible');
   } else {
     saving.setAttribute('class', '');
   }
+}
+
+function transliterate(string) {
+  return string.split('').map(function (char) {
+    return a[char] || char;
+  }).join("");
 }
