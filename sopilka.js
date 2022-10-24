@@ -678,6 +678,6 @@ function showSaving(input) {
 
 function transliterate(string) {
   return string.split('').map(function (char) {
-    return a[char] || char;
+    return transliterate[char] || char;
   }).join("");
 }
