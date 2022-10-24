@@ -156,6 +156,14 @@ let contentTranslation = {
   byHand: {
     uk: "Власна мелодія",
     en: "Your own tune"
+  }, 
+  btnSave: {
+    uk: "Зберегти",
+    en: "Save"
+  },
+  chooseFormat: {
+    uk: 'Зберегти як <label for="pdf">PDF</label> <label for="png">PNG</label>',
+    en: 'Save as <label for="pdf">PDF</label> <label for="png">PNG</label>'
   }
 };
 
@@ -190,6 +198,8 @@ var tune = document.getElementById("tune");
 var lang = document.getElementById("lang");
 var slogan = document.getElementById("slogan");
 var btnSave = document.getElementById("btnSave");
+var saving = document.getElementById("saving");
+var chooseFormat = document.getElementById("chooseFormat");
 var rbSaveToPng = document.getElementById("png");
 var info = document.getElementById("info");
 var settings = document.getElementById("settings");
@@ -229,6 +239,7 @@ if (localStorage.getItem('tune')) {
     } else {
       notes.value = '';
     }
+    showSaving(notes.value);
   } else {
     notesValueChange(tunes[tune.value]);
   }
@@ -242,6 +253,7 @@ if (localStorage.getItem('lang')) {
 }
 
 notes.addEventListener("input", function (event) {
+  showSaving(event.target.value);
   normalizeInput(event.target.value);
 });
 
@@ -407,6 +419,7 @@ function changeTune() {
   } else {
     notes.value = localStorage.getItem("ownNotes");
     showTabs(notes.value);
+    showSaving(notes.value);
   }
 }
 
@@ -432,6 +445,8 @@ function changeLang(newLang) {
   optionScaleB.innerText = tunes[optionScaleB.getAttribute('value')].name[currentLang];
   optionScaleE.innerText = tunes[optionScaleE.getAttribute('value')].name[currentLang];
   optionOwnTune.innerText = contentTranslation[optionOwnTune.getAttribute('value')][currentLang];
+  chooseFormat.innerHTML = contentTranslation[chooseFormat.id][currentLang];
+  btnSave.setAttribute('value', contentTranslation[btnSave.id][currentLang]);
   for (let slide in infoSlides) {
     document.getElementById(slide).innerHTML = infoSlides[slide][currentLang];
   }
@@ -449,6 +464,7 @@ function notesValueChange(toTune) {
     notes.value = `---${toTune.name}\n--${toTune.description}\n${toTune.commentedNotes}`;
   }
   showTabs(notes.value);
+  showSaving(notes.value);
 }
 
 function normalizeInput(input) {
@@ -544,21 +560,23 @@ function addInfoSlides() {
 
 function saveResults() {
   if (rbSaveToPng.checked) {
-    html2canvas(tabs, {allowTaint: true}).then(function (canvas) {
-      // IE/Edge Support
-      if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(canvas.msToBlob(), "tabs.png");
-      } else {
-        // other browsers
-        let link = document.createElement("a");
-        document.body.appendChild(link);
-        link.href = canvas.toDataURL();
-        link.download = "tabs.png";
-        link.click();
-        document.body.removeChild(link);
-      }
+    html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
+      let link = document.createElement("a");
+      document.body.appendChild(link);
+      link.href = canvas.toDataURL();
+      link.download = "tabs.png";
+      link.click();
+      document.body.removeChild(link);
     });
   } else {
     window.print();
+  }
+}
+
+function showSaving(input) {
+  if(input === '') {
+    saving.setAttribute('class', 'invisible');
+  } else {
+    saving.setAttribute('class', '');
   }
 }
