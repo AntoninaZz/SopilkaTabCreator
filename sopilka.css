@@ -54,7 +54,8 @@ main p {
   margin: 0;
 }
 
-kbd {
+kbd,
+#saving label {
   font-family: 'Consolas', monospace;
   padding: 0 0.2em;
   background-color: #eee;
@@ -126,16 +127,45 @@ figure {
   display: inline-block;
 }
 
-figure.spacing-0 { margin: 15px 0.5px; }
-figure.spacing-1 { margin: 15px 1px; }
-figure.spacing-2 { margin: 15px 1.5px; }
-figure.spacing-3 { margin: 15px 2px; }
-figure.spacing-4 { margin: 15px 2.5px; }
-figure.spacing-5 { margin: 15px 3px; }
-figure.spacing-6 { margin: 15px 3.5px; }
-figure.spacing-7 { margin: 15px 4px; }
-figure.spacing-8 { margin: 15px 4.5px; }
-figure.spacing-9 { margin: 15px 5px; }
+figure.spacing-0 {
+  margin: 15px 0.5px;
+}
+
+figure.spacing-1 {
+  margin: 15px 1px;
+}
+
+figure.spacing-2 {
+  margin: 15px 1.5px;
+}
+
+figure.spacing-3 {
+  margin: 15px 2px;
+}
+
+figure.spacing-4 {
+  margin: 15px 2.5px;
+}
+
+figure.spacing-5 {
+  margin: 15px 3px;
+}
+
+figure.spacing-6 {
+  margin: 15px 3.5px;
+}
+
+figure.spacing-7 {
+  margin: 15px 4px;
+}
+
+figure.spacing-8 {
+  margin: 15px 4.5px;
+}
+
+figure.spacing-9 {
+  margin: 15px 5px;
+}
 
 figcaption {
   text-align: center;
@@ -197,7 +227,7 @@ select#tune {
 label[for="tune"] {
   display: block;
   font-size: 12px;
-  color:#888;
+  color: #888;
   padding: 0 0 5px 5px;
   margin-top: 20px;
 }
@@ -217,12 +247,58 @@ label[for="tune"] {
   align-items: center;
 }
 
+#saving {
+  text-align: right;
+  width: fit-content;
+  float: right;
+}
+
+#saving p {
+  font-size: 14px;
+}
+
+#saving label {
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+#pdf:checked~p label[for="pdf"],
+#png:checked~p label[for="png"] {
+  background-color: #888;
+  color: white;
+  border-radius: 3px;
+}
+
+#saving #btnSave {
+  background-color: firebrick;
+  border: none;
+  color: white;
+  padding: 12px 32px;
+  margin: 20px 0 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#saving #btnSave:hover {
+  background-color: rgb(150, 30, 30);
+}
+
+#saving #btnSave:active {
+  background-color: rgb(124, 24, 24);
+}
+
 @media print {
 
   header,
   p,
-  label, 
-  label[for="tune"], 
+  label,
+  label[for="tune"],
   select,
   textarea {
     display: none;
@@ -238,17 +314,46 @@ label[for="tune"] {
   figure {
     margin: 10px 2.5px;
   }
-  
-  figure.spacing-0 { margin: 10px 0.5px; }
-  figure.spacing-1 { margin: 10px 1px; }
-  figure.spacing-2 { margin: 10px 1.5px; }
-  figure.spacing-3 { margin: 10px 2px; }
-  figure.spacing-4 { margin: 10px 2.5px; }
-  figure.spacing-5 { margin: 10px 3px; }
-  figure.spacing-6 { margin: 10px 3.5px; }
-  figure.spacing-7 { margin: 10px 4px; }
-  figure.spacing-8 { margin: 10px 4.5px; }
-  figure.spacing-9 { margin: 10px 5px; }
+
+  figure.spacing-0 {
+    margin: 10px 0.5px;
+  }
+
+  figure.spacing-1 {
+    margin: 10px 1px;
+  }
+
+  figure.spacing-2 {
+    margin: 10px 1.5px;
+  }
+
+  figure.spacing-3 {
+    margin: 10px 2px;
+  }
+
+  figure.spacing-4 {
+    margin: 10px 2.5px;
+  }
+
+  figure.spacing-5 {
+    margin: 10px 3px;
+  }
+
+  figure.spacing-6 {
+    margin: 10px 3.5px;
+  }
+
+  figure.spacing-7 {
+    margin: 10px 4px;
+  }
+
+  figure.spacing-8 {
+    margin: 10px 4.5px;
+  }
+
+  figure.spacing-9 {
+    margin: 10px 5px;
+  }
 }
 
 @media (max-width: 480px) {
