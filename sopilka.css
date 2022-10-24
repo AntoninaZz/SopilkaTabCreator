@@ -30,7 +30,7 @@ body {
   color: floralwhite;
 }
 
-header {
+body > header {
   width: fit-content;
   margin-bottom: 20px;
 }
