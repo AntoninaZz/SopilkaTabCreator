@@ -650,6 +650,7 @@ function addInfoSlides() {
 function saveResults() {
   if (rbSaveToPng.checked) {
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
+      filename = '';
       currentName = currentName.replaceAll('/', '');
       currentName = currentName.replaceAll('\\', '');
       currentName = currentName.replaceAll('?', '');
@@ -665,10 +666,13 @@ function saveResults() {
       currentName = currentName.replaceAll(';', '');
       currentName = currentName.replaceAll('=', '');
       currentName = currentName.replaceAll(' ', '_');
+      for(let char of currentName) {
+        filename += transliteration[char] || char;
+      }
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
-      link.download = `${currentName}.png`;
+      link.download = `${filename}.png`;
       link.click();
       document.body.removeChild(link);
     });
