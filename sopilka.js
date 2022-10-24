@@ -672,7 +672,7 @@ function saveResults() {
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
-      link.download = `${filename}.png`;
+      link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
     });
