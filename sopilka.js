@@ -191,95 +191,80 @@ let infoSlides = {
 }
 
 let transliteration = {
-  "А": "А",
-  "Б": "B",
-  "В": "V",
-  "Г": "G",
-  "Ґ": "G",
-  "Д": "D",
-  "Е": "E",
-  "Є": "Ye",
-  "Ж": "Zh",
-  "З": "Z",
-  "И": "Y",
-  "І": "I",
-  "Ї": "Yi",
-  "Й": "Y",
-  "К": "K",
-  "Л": "L",
-  "М": "M",
-  "Н": "N",
-  "О": "O",
-  "П": "P",
-  "Р": "R",
-  "С": "S",
-  "Т": "T",
-  "У": "U",
-  "Ф": "F",
-  "Х": "H",
-  "Ц": "Ts",
-  "Ч": "Ch",
-  "Ш": "Sh",
-  "Щ": "Sch",
-  "Ь": "'",
-  "Ю": "Yu",
-  "Я": "Ya",
-  "Э": "E",
-  "Ё": "Yo",
-  "Ы": "I",
-  "Ъ": "'",
-  "а": "а",
-  "б": "b",
-  "в": "v",
-  "г": "g",
-  "ґ": "g",
-  "д": "d",
-  "е": "e",
-  "є": "ye",
-  "ж": "zh",
-  "з": "z",
-  "и": "y",
-  "і": "i",
-  "ї": "yi",
-  "й": "y",
-  "к": "k",
-  "л": "l",
-  "м": "m",
-  "н": "n",
-  "о": "o",
-  "п": "p",
-  "р": "r",
-  "с": "s",
-  "т": "t",
-  "у": "u",
-  "ф": "f",
-  "х": "h",
-  "ц": "ts",
-  "ч": "ch",
-  "ш": "sh",
-  "щ": "sch",
-  "ь": "'",
-  "ю": "yu",
-  "я": "ya",
-  "э": "e",
-  "ё": "yo",
-  "ы": "i",
-  "ъ": "'",
-  " ": "_",
-  "/": "",
-  "\\": "",
-  "?": "",
-  "%": "",
-  "*": "",
-  ":": "",
-  "|": "",
-  '"': "",
-  "<": "",
-  ">": "",
-  ".": "",
-  ",": "",
-  ";": "",
-  "=": ""
+  А: "А",
+  Б: "B",
+  В: "V",
+  Г: "G",
+  Ґ: "G",
+  Д: "D",
+  Е: "E",
+  Є: "Ye",
+  Ж: "Zh",
+  З: "Z",
+  И: "Y",
+  І: "I",
+  Ї: "Yi",
+  Й: "Y",
+  К: "K",
+  Л: "L",
+  М: "M",
+  Н: "N",
+  О: "O",
+  П: "P",
+  Р: "R",
+  С: "S",
+  Т: "T",
+  У: "U",
+  Ф: "F",
+  Х: "H",
+  Ц: "Ts",
+  Ч: "Ch",
+  Ш: "Sh",
+  Щ: "Sch",
+  Ь: "'",
+  Ю: "Yu",
+  Я: "Ya",
+  Э: "E",
+  Ё: "Yo",
+  Ы: "I",
+  Ъ: "'",
+  а: "а",
+  б: "b",
+  в: "v",
+  г: "g",
+  ґ: "g",
+  д: "d",
+  е: "e",
+  є: "ye",
+  ж: "zh",
+  з: "z",
+  и: "y",
+  і: "i",
+  ї: "yi",
+  й: "y",
+  к: "k",
+  л: "l",
+  м: "m",
+  н: "n",
+  о: "o",
+  п: "p",
+  р: "r",
+  с: "s",
+  т: "t",
+  у: "u",
+  ф: "f",
+  х: "h",
+  ц: "ts",
+  ч: "ch",
+  ш: "sh",
+  щ: "sch",
+  ь: "'",
+  ю: "yu",
+  я: "ya",
+  э: "e",
+  ё: "yo",
+  ы: "i",
+  ъ: "'"
 };
 
 // main code
@@ -513,6 +498,11 @@ function changeTune() {
     notes.value = localStorage.getItem("ownNotes");
     showTabs(notes.value);
     showSaving(notes.value);
+    if (notes.value.split('\n').filter(line => line.startsWith('---')).length>0) {
+      currentName = notes.value.split('\n').filter(line => line.startsWith('---'))[0].slice(3);
+    } else {
+      currentName = '';
+    }
   }
 }
 
@@ -553,8 +543,10 @@ function changeLang(newLang) {
 function notesValueChange(toTune) {
   if (typeof toTune.name === 'object') {
     notes.value = `---${toTune.name[currentLang]}\n--${toTune.description[currentLang]}\n${toTune.commentedNotes[currentLang]}`;
+    currentName = toTune.name[currentLang];
   } else {
     notes.value = `---${toTune.name}\n--${toTune.description}\n${toTune.commentedNotes}`;
+    currentName = toTune.name;
   }
   showTabs(notes.value);
   showSaving(notes.value);
@@ -570,6 +562,8 @@ function normalizeInput(input) {
       }
     } else if (lines[i].startsWith('---')) {
       currentName = lines[i].slice(3);
+    } else {
+      currentName = '';
     }
   }
   let normalizedInput = '';
@@ -656,10 +650,25 @@ function addInfoSlides() {
 function saveResults() {
   if (rbSaveToPng.checked) {
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
+      currentName = currentName.replaceAll('/', '');
+      currentName = currentName.replaceAll('\\', '');
+      currentName = currentName.replaceAll('?', '');
+      currentName = currentName.replaceAll('%', '');
+      currentName = currentName.replaceAll('*', '');
+      currentName = currentName.replaceAll(':', '');
+      currentName = currentName.replaceAll('|', '');
+      currentName = currentName.replaceAll('"', '');
+      currentName = currentName.replaceAll('<', '');
+      currentName = currentName.replaceAll('>', '');
+      currentName = currentName.replaceAll('.', '');
+      currentName = currentName.replaceAll(',', '');
+      currentName = currentName.replaceAll(';', '');
+      currentName = currentName.replaceAll('=', '');
+      currentName = currentName.replaceAll(' ', '_');
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
-      link.download = `${currentName === '' ? 'tabs' : transliterate(currentName)}.png`;
+      link.download = `${currentName}.png`;
       link.click();
       document.body.removeChild(link);
     });
@@ -674,10 +683,4 @@ function showSaving(input) {
   } else {
     saving.setAttribute('class', '');
   }
-}
-
-function transliterate(string) {
-  return string.split('').map(function (char) {
-    return transliterate[char] || char;
-  }).join("");
 }
