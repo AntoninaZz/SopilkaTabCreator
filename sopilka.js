@@ -189,6 +189,8 @@ var tabs = document.getElementById("tabs");
 var tune = document.getElementById("tune");
 var lang = document.getElementById("lang");
 var slogan = document.getElementById("slogan");
+var btnSave = document.getElementById("btnSave");
+var rbSaveToPng = document.getElementById("png");
 var info = document.getElementById("info");
 var settings = document.getElementById("settings");
 var spacing = document.getElementById("spacing");
@@ -538,4 +540,25 @@ function addInfoSlides() {
   carouselContent.appendChild(carousel);
   carouselContent.appendChild(carouselNavigation);
   infoPopup.appendChild(carouselContent);
+}
+
+function saveResults() {
+  if (rbSaveToPng.checked) {
+    html2canvas(tabs, {allowTaint: true}).then(function (canvas) {
+      // IE/Edge Support
+      if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(canvas.msToBlob(), "tabs.png");
+      } else {
+        // other browsers
+        let link = document.createElement("a");
+        document.body.appendChild(link);
+        link.href = canvas.toDataURL();
+        link.download = "tabs.png";
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  } else {
+    window.print();
+  }
 }
