@@ -31,10 +31,9 @@ let optionOwnTune;
 let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
-const dataURL = 'data.json'; //https://raw.githubusercontent.com/AntoninaZz/SopilkaTabCreator/main/data.json
 
 // entry point
-getData(dataURL);
+getData('data.json');
 
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -93,6 +92,10 @@ function getSettingsFromLocalStorage() {
   if (localStorage.getItem('lang')) {
     currentLang = lang.value = localStorage.getItem('lang');
     changeLang(currentLang);
+  }
+
+  if (localStorage.getItem('saveToPng')) {
+    rbSaveToPng.checked = true;
   }
 }
 
@@ -410,6 +413,7 @@ function addInfoSlides() {
 
 function saveResults() {
   if (rbSaveToPng.checked) {
+    localStorage.setItem("saveToPng", "true");
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
       filename = '';
       currentName = currentName.replaceAll('/', '');
@@ -438,6 +442,7 @@ function saveResults() {
       document.body.removeChild(link);
     });
   } else {
+    localStorage.removeItem("saveToPng");
     window.print();
   }
 }
