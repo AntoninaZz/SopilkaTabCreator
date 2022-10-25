@@ -33,7 +33,7 @@ let currentSpacing = 4;
 let currentName = '';
 
 // entry point
-getData('data.json');
+getData('https://raw.githubusercontent.com/AntoninaZz/SopilkaTabCreator/main/data.json'); //!!!!!!!!!!!!!!!!!!
 
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -102,69 +102,94 @@ function getSettingsFromLocalStorage() {
 function showTabs(notes) {
   tabs.innerHTML = '';
   for (let i = 0; i < notes.length; i++) {
-    if (notes[i] !== 'c' && notes[i] !== 'd' && notes[i] !== 'e' && notes[i] !== 'f' && notes[i] !== 'g' && notes[i] !== 'a' && notes[i] !== 'b' && notes[i] !== 'C' && notes[i] !== 'D' && notes[i] !== 'E' && notes[i] !== 'F' && notes[i] !== 'G' && notes[i] !== 'A' && notes[i] !== 'B' && notes[i] !== ' ' && notes[i] !== '\n' && notes[i] !== '-') {
-      elementCreation('error');
-    } else {
-      if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] == '-' && notes[i + 4] !== '\n') {
-        let title = notes.slice(i + 4).split('\n')[0];
-        i = i + 3 + title.length;
-        elementCreation(`title_${title}`);
-      } else if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] == '-' && notes[i + 4] == '\n') {
-        i = i + 3;
-        elementCreation(`title_`);
-      } else if (i == 0 && notes[i] == '-' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] !== '\n') {
-        let title = notes.slice(i + 3).split('\n')[0];
-        i = i + 2 + title.length;
-        elementCreation(`title_${title}`);
-      } else if (i == 0 && notes[i] == '-' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] == '\n') {
-        i = i + 2;
-        elementCreation(`title_`);
-      } else if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] !== '\n') {
-        let subtitle = notes.slice(i + 3).split('\n')[0];
-        i = i + 2 + subtitle.length;
-        elementCreation(`subtitle_${subtitle}`);
-      } else if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] == '-' && notes[i + 3] == '\n') {
-        i = i + 2;
-        elementCreation(`subtitle_`);
-      } else if (i == 0 && notes[i] == '-' && notes[i + 1] == '-' && notes[i + 2] !== '\n') {
-        let subtitle = notes.slice(i + 2).split('\n')[0];
-        i = i + 1 + subtitle.length;
-        elementCreation(`subtitle_${subtitle}`);
-      } else if (i == 0 && notes[i] == '-' && notes[i + 1] == '-' && notes[i + 2] == '\n') {
-        i = i + 1;
-        elementCreation(`subtitle_`);
-      } else if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] !== '\n') {
-        let comment = notes.slice(i + 2).split('\n')[0];
-        i = i + 1 + comment.length;
-        elementCreation(`comment_${comment}`);
-      } else if (notes[i] == '\n' && notes[i + 1] == '-' && notes[i + 2] == '\n') {
-        i = i + 1;
-        elementCreation(`comment_`);
-      } else if (i == 0 && notes[i] == '-' && notes[i + 1] !== '\n') {
-        let comment = notes.slice(i + 1).split('\n')[0];
-        i = i + comment.length;
-        elementCreation(`comment_${comment}`);
-      } else if (i == 0 && notes[i] == '-' && notes[i + 1] == '\n') {
-        elementCreation(`comment_`);
-      } else if (notes[i] == '\n') {
-        elementCreation('line');
-      } else if (notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' && notes[i + 2] == '+' && notes[i + 3] == '+') {
-        elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}${notes[++i]}`);
-      } else if ((notes[i + 1] == '+' || notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#') && notes[i + 2] == '+') {
-        elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}`);
-      } else if (notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' || notes[i + 1] == '+') {
-        if (notes[i] == notes[i].toUpperCase()) {
-          elementCreation(`${notes[i].toLowerCase()}${notes[++i]}+`);
+    switch (notes[i]) {
+      case '\n':
+        if (notes[i + 1] === '-' && notes[i + 2] === '-' && notes[i + 3] === '-' && notes[i + 4] === '\n') {
+          i = i + 3;
+          elementCreation(`title_`);
+        } else if (notes[i + 1] === '-' && notes[i + 2] === '-' && notes[i + 3] === '-') {
+          let title = notes.slice(i + 4).split('\n')[0];
+          i = i + 3 + title.length;
+          elementCreation(`title_${title}`);
+        } else if (notes[i + 1] === '-' && notes[i + 2] === '-' && notes[i + 3] === '\n') {
+          i = i + 2;
+          elementCreation(`subtitle_`);
+        } else if (notes[i + 1] === '-' && notes[i + 2] === '-') {
+          let subtitle = notes.slice(i + 3).split('\n')[0];
+          i = i + 2 + subtitle.length;
+          elementCreation(`subtitle_${subtitle}`);
+        } else if (notes[i + 1] === '-' && notes[i + 2] === '\n') {
+          i = i + 1;
+          elementCreation(`comment_`);
+        } else if (notes[i + 1] === '-') {
+          let comment = notes.slice(i + 2).split('\n')[0];
+          i = i + 1 + comment.length;
+          elementCreation(`comment_${comment}`);
         } else {
-          elementCreation(`${notes[i]}${notes[++i]}`);
+          elementCreation('line');
         }
-      } else if (notes[i] == ' ') {
+        break
+      case '-':
+        if (i === 0) {
+          if (notes[i + 1] === '-' && notes[i + 2] === '-' && notes[i + 3] === '\n') {
+            i = i + 2;
+            elementCreation(`title_`);
+          } else if (notes[i + 1] === '-' && notes[i + 2] === '-') {
+            let title = notes.slice(i + 3).split('\n')[0];
+            i = i + 2 + title.length;
+            elementCreation(`title_${title}`);
+          } else if (notes[i + 1] === '-' && notes[i + 2] === '\n') {
+            i = i + 1;
+            elementCreation(`subtitle_`);
+          } else if (notes[i + 1] === '-') {
+            let subtitle = notes.slice(i + 2).split('\n')[0];
+            i = i + 1 + subtitle.length;
+            elementCreation(`subtitle_${subtitle}`);
+          } else if (notes[i + 1] === '\n') {
+            elementCreation(`comment_`);
+          } else {
+            let comment = notes.slice(i + 1).split('\n')[0];
+            i = i + comment.length;
+            elementCreation(`comment_${comment}`);
+          }
+        }
+        break
+      case ' ':
         elementCreation('space');
-      } else if (notes[i] == notes[i].toUpperCase()) {
-        elementCreation(`${notes[i].toLowerCase()}+`);
-      } else {
-        elementCreation(notes[i]);
-      }
+        break
+      case 'C':
+      case 'c':
+      case 'D':
+      case 'd':
+      case 'E':
+      case 'e':
+      case 'F':
+      case 'f':
+      case 'G':
+      case 'g':
+      case 'A':
+      case 'a':
+      case 'B':
+      case 'b':
+        if (notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' && notes[i + 2] == '+' && notes[i + 3] == '+') {
+          elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}${notes[++i]}`);
+        } else if ((notes[i + 1] == '+' || notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#') && notes[i + 2] == '+') {
+          elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}`);
+        } else if (notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' || notes[i + 1] == '+') {
+          if (notes[i] == notes[i].toUpperCase()) {
+            elementCreation(`${notes[i].toLowerCase()}${notes[++i]}+`);
+          } else {
+            elementCreation(`${notes[i]}${notes[++i]}`);
+          }
+        } else if (notes[i] == notes[i].toUpperCase()) {
+          elementCreation(`${notes[i].toLowerCase()}+`);
+        } else {
+          elementCreation(notes[i]);
+        }
+        break
+      default:
+        elementCreation('error');
+        break
     }
   }
   spaceCorrection();
