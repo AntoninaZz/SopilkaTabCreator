@@ -186,7 +186,7 @@
         },
         "carouselSlide6": {
             "uk": "<header>Основні налаштування</header><p>У вікні налаштувань ви можете змінювати мову сторінки, регулювати проміжки між табами, а також задавати тло сторінки.</p><header>Збереження результатів</header><p>Ви можете роздрукувати сторінку з табами, зберегти її у файл з розширенням pdf або зберегти готові таби у вигляді зображення png.</p><header>Про автора</header><p>Sopilka Tab Creator створено у рамках бакалаврської дипломної роботи студентки Київського університету імені Бориса Грінченка, Здебської Антоніни.</p>",
-            "en": "<header>Basic settings</header><p>In the settings popup you can change the language of the page, adjust the spacing between tabs, and set white background of the page.</p><header>Results saving</header><p>You can print the page, save your tabs to pdf-file or download results as a png image.</p><header>Information about the author</header><p>Sopilka Tab Creator was created by student of Borys Grinchenko Kyiv University, Antonina Zdebska, as a bachelor's graduation project. (Ukraine, 2022)</p>"
+            "en": "<header>Basic settings</header><p>In the settings popup you can change the language of the page, adjust the spacing between tabs, and set white background of the page.</p><header>Save results</header><p>You can print the page, save your tabs to pdf-file or download results as a png image.</p><header>About the author</header><p>Sopilka Tab Creator was created by student of Borys Grinchenko Kyiv University, Antonina Zdebska, as a bachelor's graduation project. (Ukraine, 2022)</p>"
         }
     },
     "transliteration": {
