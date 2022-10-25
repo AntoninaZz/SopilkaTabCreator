@@ -310,7 +310,7 @@ function changeLang(newLang) {
 function notesValueChange(toTune) {
   if (typeof toTune.name === 'object') {
     notes.value = `---${toTune.name[currentLang]}\n--${toTune.description[currentLang]}\n${toTune.commentedNotes[currentLang]}`;
-    currentName = toTune.name[currentLang];
+    currentName = toTune.name.en;
   } else {
     notes.value = `---${toTune.name}\n--${toTune.description}\n${toTune.commentedNotes}`;
     currentName = toTune.name;
