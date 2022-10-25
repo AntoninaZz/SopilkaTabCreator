@@ -157,7 +157,7 @@ input:checked+.slider:before {
 }
 
 .carousel {
-    width: 150vw;
+    width: 180vw;
     transition: all 2s;
 }
 
@@ -188,10 +188,15 @@ input:checked+.slider:before {
     margin-left: -120vw;
 }
 
+#slider6:checked~.carouselContent .carousel {
+    margin-left: -150vw;
+}
+
 #slider1:checked~label[for="slider2"].right::after,
 #slider2:checked~label[for="slider3"].right::after,
 #slider3:checked~label[for="slider4"].right::after,
-#slider4:checked~label[for="slider5"].right::after {
+#slider4:checked~label[for="slider5"].right::after,
+#slider5:checked~label[for="slider6"].right::after {
     content: '﹥';
     position: fixed;
     top: 45%;
@@ -200,6 +205,7 @@ input:checked+.slider:before {
     cursor: pointer;
 }
 
+#slider6:checked~label[for="slider5"].left::before,
 #slider5:checked~label[for="slider4"].left::before,
 #slider4:checked~label[for="slider3"].left::before,
 #slider3:checked~label[for="slider2"].left::before,
@@ -239,7 +245,8 @@ input[type="radio"] {
 #slider2:checked~.carouselContent .carouselNavigation label[for="slider2"].navigationButton,
 #slider3:checked~.carouselContent .carouselNavigation label[for="slider3"].navigationButton,
 #slider4:checked~.carouselContent .carouselNavigation label[for="slider4"].navigationButton,
-#slider5:checked~.carouselContent .carouselNavigation label[for="slider5"].navigationButton {
+#slider5:checked~.carouselContent .carouselNavigation label[for="slider5"].navigationButton,
+#slider6:checked~.carouselContent .carouselNavigation label[for="slider6"].navigationButton {
     background-color: #08f;
 }
 
@@ -250,7 +257,7 @@ input[type="radio"] {
     }
 
     .carousel {
-        width: 300vw;
+        width: 360vw;
     }
 
     .slide {
@@ -272,6 +279,10 @@ input[type="radio"] {
 
     #slider5:checked~.carouselContent .carousel {
         margin-left: -240vw;
+    }
+
+    #slider6:checked~.carouselContent .carousel {
+        margin-left: -300vw;
     }
 
     .info header {
@@ -300,7 +311,7 @@ input[type="radio"] {
     }
 
     .carousel {
-        width: 400vw;
+        width: 480vw;
     }
 
     .slide {
@@ -322,6 +333,10 @@ input[type="radio"] {
 
     #slider5:checked~.carouselContent .carousel {
         margin-left: -320vw;
+    }
+
+    #slider6:checked~.carouselContent .carousel {
+        margin-left: -400vw;
     }
 
     .info {
