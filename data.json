@@ -131,7 +131,7 @@
             "en": "Play sopilka easily without musical notation knowledge!"
         },
         "description": {
-            "uk": "Для <em>десятидіркової хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для групування нот використовуйте пробіли і переходи на новий рядок, а заголовки, підзаголовки і коментарі можна додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!",
+            "uk": "Для <em>десятиотворної хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для групування нот використовуйте пробіли і переходи на новий рядок, а заголовки, підзаголовки і коментарі можна додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!",
             "en": "For <em>ten-hole chromatic sopilka</em>. Use <kbd>#</kbd> after a note to indicate sharp, and <kbd>+</kbd> and <kbd>++</kbd> to indicate upper octaves. Spaces and newlines can be used for grouping, and headings, subheadings and comments can be added by starting a new line with <kbd>---</kbd>, <kbd>--</kbd> and <kbd>-</kbd>. Good luck!"
         },
         "tune": {
@@ -165,7 +165,7 @@
     },
     "infoSlides": {
         "carouselSlide1": {
-            "uk": "<header>Сопілка – </header><p>старовинний український народний духовий музичний інструмент, схожий на блок-флейту. Sopilka Tab Creator створений для найбільш поширеного виду сопілки – десятидіркової хроматичної сопілки сопрано у тональності до.</p><p>Якщо Ви новачок у музиці, й не вмієте читати ноти, зате маєте нестримну жагу грати на сопілці, то Sopilka Tab Creator створений саме для Вас. Завдяки табам Ви одразу зможете грати улюблені мелодії, користуючись при цьому мінімумом знань нотної грамоти.</p>",
+            "uk": "<header>Сопілка – </header><p>старовинний український народний духовий музичний інструмент, схожий на блок-флейту. Sopilka Tab Creator створений для найбільш поширеного виду сопілки – десятиотворної хроматичної сопілки сопрано у тональності до.</p><p>Якщо Ви новачок у музиці, й не вмієте читати ноти, зате маєте нестримну жагу грати на сопілці, то Sopilka Tab Creator створений саме для Вас. Завдяки табам Ви одразу зможете грати улюблені мелодії, користуючись при цьому мінімумом знань нотної грамоти.</p>",
             "en": "<header>Sopilka</header><p>is an ancient Ukrainian folk recorder. Sopilka Tab Creator is designed for the most common type of sopilka - a ten-hole chromatic soprano sopilka in the key of C.</p><p>If you are new to sopilka and don't read music, but you have enthusiasm to play, then Sopilka Tab Creator is just for you. Using tabs you will be able to play your favorite tunes immediately with a minimum knowledge of musical notation.</p>"
         },
         "carouselSlide2": {
