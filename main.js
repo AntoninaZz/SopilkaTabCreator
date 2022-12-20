@@ -34,7 +34,7 @@ let currentSpacing = 4;
 let currentName = '';
 
 // entry point
-getData('https://raw.githubusercontent.com/AntoninaZz/SopilkaTabCreator/main/data.json'); //!!!!!!!!!!!!!!!!!!
+getData(window.location.href + 'data.json');
 window.onload=function(){setTimeout(showInterview,4000)};
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
