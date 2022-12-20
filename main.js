@@ -25,6 +25,7 @@ let labelLang = document.querySelectorAll('[for="lang"]')[0];
 let labelSpacing = document.querySelectorAll('[for="spacing"]')[0];
 let labelWhiteBg = document.querySelectorAll('[for="whiteBg"]')[0];
 let infoPopup = document.getElementsByClassName("info")[0];
+let interviewPopup = document.getElementsByClassName("interview")[0];
 let optionScaleB;
 let optionScaleE;
 let optionOwnTune;
@@ -34,7 +35,7 @@ let currentName = '';
 
 // entry point
 getData('https://raw.githubusercontent.com/AntoninaZz/SopilkaTabCreator/main/data.json'); //!!!!!!!!!!!!!!!!!!
-
+window.onload=function(){setTimeout(showInterview,4000)};
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
   normalizeInput(event.target.value);
@@ -478,4 +479,12 @@ function showSaving(input) {
   } else {
     saving.setAttribute('class', '');
   }
+}
+
+function showInterview() {
+  interviewPopup.setAttribute("class", "interview popup show");
+}
+
+function closeInterview() {
+  interviewPopup.setAttribute("class", "interview popup");
 }
