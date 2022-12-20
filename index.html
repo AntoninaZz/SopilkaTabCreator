@@ -13,6 +13,14 @@
 </head>
 
 <body>
+    <div class="interview popup">
+        <img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon" onclick="closeInterview()">
+        <div class="icon"><img src="./img/quiz.svg" class="quiz-icon"></div>
+        <header>Допоможи розробнику – залиш відгук!</header>
+        <p>Дякую, що користуєтесь цією розробкою! Будь ласка, приділіть кілька хвилин часу та допоможіть автору провести дослідження для дипломної роботи. Опитування не займе більше 5 хвилин, але є дуже важливим для мене!</p>
+        <a class="custom-button" href="https://forms.gle/9mYXo6C3LjUgV6cJ7" target="_blank" rel="noopener" onclick="closeInterview()">Пройти опитування</a>
+    </div>
+    <div class="overlay"></div>
     <div class="menu">
         <label for="info"><img src="./img/info.svg" alt="info"></label>
         <input type="checkbox" id="info" onchange="singlePopup(this)">
@@ -39,6 +47,7 @@
                 </label>
             </div>
         </div>
+        <div class="overlay"></div>
     </div>
     <header>
         <h1 lang="en">Sopilka Tab Creator</h1>
