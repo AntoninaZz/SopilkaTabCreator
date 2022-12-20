@@ -88,6 +88,10 @@ label[for="settings"]:hover {
     transform: translate(-50%, -50%);
 }
 
+.interview {
+    font-size: 14px;
+}
+
 .info {
     font-size: 14px;
     text-align: left;
@@ -351,7 +355,8 @@ input[type="radio"] {
 }
 
 @media (max-width: 768px) {
-    .info {
+    .info,
+    .interview {
         font-size: 13px;
     }
 
@@ -399,7 +404,8 @@ input[type="radio"] {
         margin-left: -400vw;
     }
 
-    .info {
+    .info,
+    .interview {
         font-size: 12px;
     }
 
