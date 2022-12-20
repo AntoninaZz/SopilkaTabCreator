@@ -18,6 +18,26 @@
     transition: all 0.3s ease;
 }
 
+.overlay {
+    display: none;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    z-index: 4;
+    transition: all 0.3s;
+}
+
+#info:checked~.overlay,
+#settings:checked~.overlay,
+.interview.show~.overlay {
+    display: block;
+    opacity: 1;
+}
+
 #info {
     display: none;
 }
@@ -32,13 +52,9 @@ label[for="settings"]:hover {
     opacity: 0.5;
 }
 
-#info:checked~.info {
-    opacity: 1;
-    pointer-events: auto;
-    top: 50%;
-}
-
-#settings:checked~.settings {
+#info:checked~.info,
+#settings:checked~.settings,
+.interview.show {
     opacity: 1;
     pointer-events: auto;
     top: 50%;
@@ -55,19 +71,63 @@ label[for="settings"]:hover {
     opacity: 0.5;
 }
 
+.interview .icon {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    background: linear-gradient(136deg, white 0%, firebrick 100%);
+    border-radius: 50%;
+}
+
+.interview .icon .quiz-icon {
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .info {
     font-size: 14px;
     text-align: left;
     align-items: left;
 }
 
-.info header {
+.popup header {
     font-size: 20px;
     margin-bottom: 10px;
 }
 
-.info p {
+.interview header {
+    margin-top: 20px;
+}
+
+.popup p {
     line-height: 20px;
+}
+
+.custom-button {
+    display: block;
+    height: 47px;
+    line-height: 47px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(136deg, rgba(178, 34, 34, 0.1) 0%, firebrick 100%);
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.custom-button:hover,
+.custom-button:active,
+.custom-button:visited {
+    background: linear-gradient(136deg, rgba(178, 34, 34, 0.4) 0%, firebrick 100%);
+    color: white;
+    text-decoration: none;
 }
 
 .setting {
@@ -285,7 +345,7 @@ input[type="radio"] {
         margin-left: -300vw;
     }
 
-    .info header {
+    .popup header {
         font-size: 18px;
     }
 }
@@ -295,11 +355,11 @@ input[type="radio"] {
         font-size: 13px;
     }
 
-    .info header {
+    .popup header {
         margin-bottom: 7px;
     }
 
-    .info p {
+    .popup p {
         line-height: 17px;
     }
 }
@@ -343,12 +403,12 @@ input[type="radio"] {
         font-size: 12px;
     }
 
-    .info header {
+    .popup header {
         font-size: 16px;
         margin-bottom: 5px;
     }
 
-    .info p {
+    .popup p {
         line-height: 14px;
     }
 }
