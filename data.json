@@ -92,37 +92,44 @@
         "c": {
             "uk": "до",
             "en": "c",
-            "it": "do"
+            "it": "do",
+            "num": "1"
         },
         "d": {
             "uk": "ре",
             "en": "d",
-            "it": "re"
+            "it": "re",
+            "num": "2"
         },
         "e": {
             "uk": "мі",
             "en": "e",
-            "it": "mi"
+            "it": "mi",
+            "num": "3"
         },
         "f": {
             "uk": "фа",
             "en": "f",
-            "it": "fa"
+            "it": "fa",
+            "num": "4"
         },
         "g": {
             "uk": "соль",
             "en": "g",
-            "it": "sol"
+            "it": "sol",
+            "num": "5"
         },
         "a": {
             "uk": "ля",
             "en": "a",
-            "it": "la"
+            "it": "la",
+            "num": "6"
         },
         "b": {
             "uk": "сі",
             "en": "b",
-            "it": "si"
+            "it": "si",
+            "num": "7"
         }
     },
     "contentTranslation": {
