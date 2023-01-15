@@ -145,6 +145,10 @@
             "uk": "Мелодія",
             "en": "Tune"
         },
+        "sopilkaType": {
+            "uk": "Сопілка",
+            "en": "Sopilka type"
+        },
         "lang": {
             "uk": "Мова",
             "en": "Lang"
