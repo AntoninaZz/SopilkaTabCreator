@@ -285,11 +285,16 @@
             "offset": 0,
             "notes": [
                 "c",
+                "c_sharp",
                 "d",
+                "d_sharp",
                 "e",
                 "f",
+                "f_sharp",
                 "g",
+                "g_sharp",
                 "a",
+                "a_sharp",
                 "b"
             ]
         },
@@ -298,7 +303,7 @@
                 "uk": "Альт Фа",
                 "en": "Alt F"
             },
-            "offset": 4
+            "offset": 6
         }
     }
 }
