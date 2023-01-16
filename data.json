@@ -298,12 +298,16 @@
                 "b"
             ]
         },
-        "altF": {
+        "altoF": {
             "name": {
                 "uk": "Альт Фа",
-                "en": "Alt F"
+                "en": "Alto F"
             },
-            "offset": 7
+            "offset": 7,
+            "scale": {
+                "uk": "---Аплікатура сопілки альт фа\nff#gg#aa#bcc#dd#e FF#GG#AA#BCC#DD#E\nF+F#+G+G#+A+A#+B+C+",
+                "en": "---Fingering of the sopilka alto f\nff#gg#aa#bcc#dd#e FF#GG#AA#BCC#DD#E\nF+F#+G+G#+A+A#+B+C+"
+            }
         }
     }
 }
