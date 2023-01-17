@@ -161,6 +161,10 @@
             "uk": "Біле тло",
             "en": "White background"
         },
+        "showNotes": {
+            "uk": "Показувати ноти",
+            "en": "Show notes"
+        },
         "byHand": {
             "uk": "Власна мелодія",
             "en": "Your own tune"
