@@ -17,8 +17,10 @@
         <img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon" onclick="closeInterview()">
         <div class="icon"><img src="./img/quiz.svg" class="quiz-icon"></div>
         <header>Допоможи розробнику – залиш відгук!</header>
-        <p>Дякую, що користуєтесь цією розробкою! Будь ласка, приділіть кілька хвилин часу та допоможіть автору провести дослідження для дипломної роботи. Опитування не займе більше 5 хвилин, але є дуже важливим для мене!</p>
-        <a class="custom-button" href="https://forms.gle/9mYXo6C3LjUgV6cJ7" target="_blank" rel="noopener" onclick="closeInterview()">Пройти опитування</a>
+        <p>Дякую, що користуєтесь цією розробкою! Будь ласка, приділіть кілька хвилин часу та допоможіть автору провести
+            дослідження для дипломної роботи. Опитування не займе більше 5 хвилин, але є дуже важливим для мене!</p>
+        <a class="custom-button" href="https://forms.gle/9mYXo6C3LjUgV6cJ7" target="_blank" rel="noopener"
+            onclick="closeInterview()">Пройти опитування</a>
     </div>
     <div class="overlay"></div>
     <div class="menu">
@@ -46,6 +48,13 @@
                     <span class="slider round"></span>
                 </label>
             </div>
+            <div class="setting">
+                <label for="showNotes">Показувати ноти</label>
+                <label class="switch">
+                    <input type="checkbox" id="showNotes" onchange="showNotes(this.checked)" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
         <div class="overlay"></div>
     </div>
@@ -58,8 +67,16 @@
             позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для
             групування нот використовуйте пробіли і переходи на новий рядок, а заголовки, підзаголовки і коментарі можна
             додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!</p>
-        <label for="tune">Мелодія</label>
-        <select name="tune" id="tune" onchange="changeTune()"></select>
+        <div class="options">
+            <div>
+                <label for="tune">Мелодія</label>
+                <select name="tune" id="tune" onchange="changeTune()"></select>
+            </div>
+            <div id="sopilkaTypeChanger">
+                <label for="sopilkaType">Сопілка</label>
+                <select name="sopilkaType" id="sopilkaType" onchange="changeSopilkaType(this.value)"></select>
+            </div>
+        </div>
         <textarea id="notes" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
         <div id="tabs"></div>
         <div id="saving">
