@@ -41,7 +41,7 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 
 // entry point
-getData(window.location.href + 'data.json');
+getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -237,7 +237,7 @@ function elementCreation(note) {
     figure.setAttribute("class", `spacing-${currentSpacing}`);
     let img = document.createElement('img');
     let figcaption = document.createElement('figcaption');
-    figcaption.setAttribute("class", `lang-${currentLang}${localStorage.getItem('showNotes')?' invisible':''}`);
+    figcaption.setAttribute("class", `lang-${currentLang}${localStorage.getItem('showNotes') ? ' invisible' : ''}`);
     if (note.endsWith("#")) {
       img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}.svg`;
       figcaption.innerText = `${notesTranslation[note[0]][currentLang]}#`;
@@ -310,7 +310,7 @@ function changeTune() {
   } else {
     sopilkaTypeChanger.setAttribute('class', '');
     sopilkaType.value = currentSopilkaType = localStorage.getItem('sopilkaType') || 'sopranoC';
-    notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : ''; 
+    notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : '';
     showTabs(notes.value);
     showSaving(notes.value);
     getCurrentName(notes.value);
@@ -376,7 +376,7 @@ function changeLang(newLang) {
 function changeSopilkaType(type) {
   currentSopilkaType = type;
   localStorage.setItem("sopilkaType", currentSopilkaType);
-  notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : ''; 
+  notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : '';
   showTabs(notes.value);
   showSaving(notes.value);
 }
@@ -521,7 +521,11 @@ function saveResults() {
       }
       let link = document.createElement("a");
       document.body.appendChild(link);
-      photo = link.href = canvas.toDataURL();
+      link.href = canvas.toDataURL();
+      canvas.toBlob(function(blob){
+        photo = URL.createObjectURL(blob);
+        console.log(photo);
+      },'image/png');
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
@@ -540,7 +544,7 @@ function saveResults() {
     api = new XMLHttpRequest();
     api.open("GET", url, true);
     api.send();
-}
+  }
 }
 
 function showSaving(input) {
