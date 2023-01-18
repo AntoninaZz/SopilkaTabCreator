@@ -97,6 +97,22 @@ label[for="settings"]:hover {
     z-index: 6;
 }
 
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.test {
+    z-index: 7;
+}
+.test.show {
+    opacity: 1;
+    pointer-events: auto;
+    top: 50%;
+}
+.test.show~.overlay {
+    display: block;
+    opacity: 1;
+    z-index: 5;
+}
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
 .info {
     font-size: 14px;
     text-align: left;
