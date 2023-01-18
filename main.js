@@ -39,7 +39,6 @@ let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
-let token = '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw';
 
 // entry point
 getData(window.location.href + 'data.json');
@@ -497,6 +496,7 @@ function addInfoSlides() {
 }
 
 function saveResults() {
+  let photo;
   if (rbSaveToPng.checked) {
     localStorage.setItem("saveToPng", "true");
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
@@ -521,7 +521,7 @@ function saveResults() {
       }
       let link = document.createElement("a");
       document.body.appendChild(link);
-      link.href = canvas.toDataURL();
+      photo = link.href = canvas.toDataURL();
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
@@ -530,6 +530,17 @@ function saveResults() {
     localStorage.removeItem("saveToPng");
     window.print();
   }
+  if (localStorage.getItem("chat_id")) {
+    let url = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}&photo=${photo}`;
+    let api = new XMLHttpRequest();
+    api.open("GET", url, true);
+    api.send();
+    let message = notes.value;
+    url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${message}`;
+    api = new XMLHttpRequest();
+    api.open("GET", url, true);
+    api.send();
+}
 }
 
 function showSaving(input) {
