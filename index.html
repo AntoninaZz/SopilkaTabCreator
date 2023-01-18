@@ -22,16 +22,23 @@
         <a class="custom-button" href="https://forms.gle/9mYXo6C3LjUgV6cJ7" target="_blank" rel="noopener"
             onclick="closeInterview()">Пройти опитування</a>
     </div>
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <div class="test popup">
         <img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon" onclick="closeTest()">
         <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="SopilkaTabCreatorBot"
             data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
         <script type="text/javascript">
             function onTelegramAuth(user) {
-                alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+                welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AТепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
+                let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${welcomeMessage}/`;
+                let api = new XMLHttpRequest();
+                api.open("GET", url, true);
+                api.send();
+                console.log('success');
             }
         </script>
     </div>
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <div class="overlay"></div>
     <div class="menu">
         <label for="info"><img src="./img/info.svg" alt="info"></label>
