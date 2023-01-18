@@ -5,25 +5,31 @@ let notesTranslation;
 let contentTranslation;
 let infoSlides;
 let transliteration;
+let sopilkaTypes;
 let html = document.getElementsByTagName("html")[0];
 let notes = document.getElementById("notes");
 let tabs = document.getElementById("tabs");
 let tune = document.getElementById("tune");
 let lang = document.getElementById("lang");
+let sopilkaType = document.getElementById("sopilkaType");
 let slogan = document.getElementById("slogan");
 let btnSave = document.getElementById("btnSave");
 let saving = document.getElementById("saving");
+let sopilkaTypeChanger = document.getElementById("sopilkaTypeChanger");
 let chooseFormat = document.getElementById("chooseFormat");
 let rbSaveToPng = document.getElementById("png");
 let info = document.getElementById("info");
 let settings = document.getElementById("settings");
 let spacing = document.getElementById("spacing");
 let whiteBg = document.getElementById("whiteBg");
+let showNotesSlider = document.getElementById("showNotes");
 let description = document.getElementById("description");
 let labelTune = document.querySelectorAll('[for="tune"]')[0];
 let labelLang = document.querySelectorAll('[for="lang"]')[0];
+let labelSopilkaType = document.querySelectorAll('[for="sopilkaType"]')[0];
 let labelSpacing = document.querySelectorAll('[for="spacing"]')[0];
 let labelWhiteBg = document.querySelectorAll('[for="whiteBg"]')[0];
+let labelShowNotesSlider = document.querySelectorAll('[for="showNotes"]')[0];
 let infoPopup = document.getElementsByClassName("info")[0];
 let interviewPopup = document.getElementsByClassName("interview")[0];
 let optionScaleB;
@@ -32,10 +38,11 @@ let optionOwnTune;
 let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
+let currentSopilkaType = 'sopranoC';
 
 // entry point
 getData(window.location.href + 'data.json');
-window.onload=function(){setTimeout(showInterview,4000)};
+window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
   normalizeInput(event.target.value);
@@ -51,9 +58,11 @@ async function getData(url) {
   contentTranslation = response.contentTranslation;
   infoSlides = response.infoSlides;
   transliteration = response.transliteration;
+  sopilkaTypes = response.sopilkaTypes;
 
   addTuneOptions();
   addLangOptions();
+  addSopilkaTypeOptions();
   addInfoSlides();
 
   optionScaleB = document.querySelectorAll('[value="scaleB"]')[0];
@@ -69,6 +78,10 @@ function getSettingsFromLocalStorage() {
     whiteBg.checked = true;
   }
 
+  if (localStorage.getItem('showNotes')) {
+    showNotesSlider.checked = false;
+  }
+
   if (localStorage.getItem('spacing')) {
     currentSpacing = spacing.value = localStorage.getItem('spacing');
   }
@@ -76,18 +89,24 @@ function getSettingsFromLocalStorage() {
   if (localStorage.getItem('tune')) {
     tune.value = localStorage.getItem('tune');
     if (tune.value === 'byHand') {
+      if (localStorage.getItem('sopilkaType')) {
+        currentSopilkaType = localStorage.getItem("sopilkaType");
+        sopilkaType.value = currentSopilkaType;
+      }
       if (localStorage.getItem('ownNotes')) {
         notes.value = localStorage.getItem("ownNotes");
       } else {
-        notes.value = '';
+        notes.value = sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : '';
       }
       showSaving(notes.value);
       getCurrentName(notes.value);
     } else {
       notesValueChange(tunes[tune.value]);
+      sopilkaTypeChanger.setAttribute('class', 'invisible');
     }
   } else {
     notesValueChange(tunes.scaleB);
+    sopilkaTypeChanger.setAttribute('class', 'invisible');
   }
 
   if (localStorage.getItem('lang')) {
@@ -217,34 +236,36 @@ function elementCreation(note) {
     figure.setAttribute("class", `spacing-${currentSpacing}`);
     let img = document.createElement('img');
     let figcaption = document.createElement('figcaption');
-    figcaption.setAttribute("class", `lang-${currentLang}`);
+    figcaption.setAttribute("class", `lang-${currentLang}${localStorage.getItem('showNotes')?' invisible':''}`);
     if (note.endsWith("#")) {
-      img.src = `./img/${note[0]}_sharp.svg`;
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}.svg`;
       figcaption.innerText = `${notesTranslation[note[0]][currentLang]}#`;
     } else if (note.endsWith("#+")) {
       if (note == note.toUpperCase()) {
-        img.src = `./img/${note[0].toLowerCase()}_sharp++.svg`;
+        img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0].toLowerCase() + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}++.svg`;
         figcaption.innerText = `${notesTranslation[note[0].toLowerCase()][currentLang].toUpperCase()}#+`;
       } else {
-        img.src = `./img/${note[0]}_sharp+.svg`;
+        img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}+.svg`;
         figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}`;
       }
     } else if (note.endsWith("#++")) {
-      img.src = `./img/${note[0]}_sharp++.svg`;
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}++.svg`;
       figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}${note[2]}`;
-    } else {
+    } else if (note.endsWith('++')) {
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) + sopilkaTypes[currentSopilkaType].offset) % 12]}${note.substring(1)}.svg`;
+      figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}`;
+    } else if (note.endsWith('+')) {
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) + sopilkaTypes[currentSopilkaType].offset) % 12]}${note.substring(1)}.svg`;
+      figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}`;
+    } else if (note == 'space') {
       img.src = `./img/${note}.svg`;
-      if (note.endsWith('++')) {
-        figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}`;
-      } else if (note.endsWith('+')) {
-        figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}`;
-      } else if (note == 'space') {
-        figcaption.innerText = '';
-      } else if (note == 'error') {
-        figcaption.innerText = '';
-      } else {
-        figcaption.innerText = notesTranslation[note][currentLang];
-      }
+      figcaption.innerText = '';
+    } else if (note == 'error') {
+      img.src = `./img/${note}.svg`;
+      figcaption.innerText = '';
+    } else {
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) + sopilkaTypes[currentSopilkaType].offset) % 12]}${note.substring(1)}.svg`;
+      figcaption.innerText = notesTranslation[note][currentLang];
     }
     img.alt = `${note}`;
     tabs.appendChild(figure);
@@ -282,9 +303,13 @@ function addTuneOptions() {
 function changeTune() {
   localStorage.setItem("tune", tune.value);
   if (tune.value != "byHand") {
+    sopilkaTypeChanger.setAttribute('class', 'invisible');
+    currentSopilkaType = 'sopranoC';
     notesValueChange(tunes[tune.value]);
   } else {
-    notes.value = localStorage.getItem("ownNotes");
+    sopilkaTypeChanger.setAttribute('class', '');
+    sopilkaType.value = currentSopilkaType = localStorage.getItem('sopilkaType');
+    notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : ''; 
     showTabs(notes.value);
     showSaving(notes.value);
     getCurrentName(notes.value);
@@ -308,6 +333,15 @@ function addLangOptions() {
   }
 }
 
+function addSopilkaTypeOptions() {
+  for (let key in sopilkaTypes) {
+    let option = document.createElement('option');
+    option.setAttribute("value", key);
+    option.textContent = sopilkaTypes[key].name[currentLang];
+    sopilkaType.appendChild(option);
+  }
+}
+
 function changeLang(newLang) {
   currentLang = newLang;
   localStorage.setItem("lang", currentLang);
@@ -316,8 +350,10 @@ function changeLang(newLang) {
   description.innerHTML = contentTranslation[description.id][currentLang];
   labelTune.innerText = contentTranslation[labelTune.getAttribute('for')][currentLang];
   labelLang.innerText = contentTranslation[labelLang.getAttribute('for')][currentLang];
+  labelSopilkaType.innerText = contentTranslation[labelSopilkaType.getAttribute('for')][currentLang];
   labelSpacing.innerText = contentTranslation[labelSpacing.getAttribute('for')][currentLang];
   labelWhiteBg.innerText = contentTranslation[labelWhiteBg.getAttribute('for')][currentLang];
+  labelShowNotesSlider.innerText = contentTranslation[labelShowNotesSlider.getAttribute('for')][currentLang];
   optionScaleB.innerText = tunes[optionScaleB.getAttribute('value')].name[currentLang];
   optionScaleE.innerText = tunes[optionScaleE.getAttribute('value')].name[currentLang];
   optionOwnTune.innerText = contentTranslation[optionOwnTune.getAttribute('value')][currentLang];
@@ -331,6 +367,17 @@ function changeLang(newLang) {
   } else {
     showTabs(notes.value);
   }
+  for (i = 0; i < sopilkaType.length; i++) {
+    sopilkaType[i].innerText = sopilkaTypes[sopilkaType[i].value].name[currentLang];
+  }
+}
+
+function changeSopilkaType(type) {
+  currentSopilkaType = type;
+  localStorage.setItem("sopilkaType", currentSopilkaType);
+  notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : ''; 
+  showTabs(notes.value);
+  showSaving(notes.value);
 }
 
 function notesValueChange(toTune) {
@@ -352,6 +399,7 @@ function normalizeInput(input) {
       for (let key in notesTranslation) {
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk, notesTranslation[key].en);
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk.toUpperCase(), notesTranslation[key].en.toUpperCase());
+        lines[i] = lines[i].replaceAll(notesTranslation[key].num, notesTranslation[key].en);
       }
     }
   }
@@ -391,6 +439,15 @@ function changeBg(white) {
     html.setAttribute("class", "bg");
     localStorage.removeItem("whiteBg");
   }
+}
+
+function showNotes(show) {
+  if (show) {
+    localStorage.removeItem("showNotes");
+  } else {
+    localStorage.setItem("showNotes", "false");
+  }
+  showTabs(notes.value);
 }
 
 function addInfoSlides() {
