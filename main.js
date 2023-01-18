@@ -308,7 +308,7 @@ function changeTune() {
     notesValueChange(tunes[tune.value]);
   } else {
     sopilkaTypeChanger.setAttribute('class', '');
-    sopilkaType.value = currentSopilkaType = localStorage.getItem('sopilkaType');
+    sopilkaType.value = currentSopilkaType = localStorage.getItem('sopilkaType') || 'sopranoC';
     notes.value = localStorage.getItem("ownNotes") ? localStorage.getItem("ownNotes") : sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : ''; 
     showTabs(notes.value);
     showSaving(notes.value);
