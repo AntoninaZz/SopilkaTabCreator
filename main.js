@@ -98,6 +98,7 @@ function getSettingsFromLocalStorage() {
       } else {
         notes.value = sopilkaTypes[currentSopilkaType].hasOwnProperty('scale') ? sopilkaTypes[currentSopilkaType].scale[currentLang] : '';
       }
+      showTabs(notes.value);
       showSaving(notes.value);
       getCurrentName(notes.value);
     } else {
@@ -546,6 +547,7 @@ function closeInterview() {
   interviewPopup.setAttribute("class", "interview popup");
 }
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function closeTest() {
   document.getElementsByClassName("test")[0].setAttribute("class", "test popup");
   // document.getElementsByClassName("test")[0].setAttribute("class", "test popup show");
