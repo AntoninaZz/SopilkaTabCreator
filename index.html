@@ -31,7 +31,7 @@
             function onTelegramAuth(user) {
                 welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AТепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
                 let token = '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw';
-                let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${welcomeMessage}/`;
+                let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${welcomeMessage}`;
                 let api = new XMLHttpRequest();
                 api.open("GET", url, true);
                 api.send();
