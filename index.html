@@ -13,7 +13,6 @@
 </head>
 
 <body>
-    <script src="main.js"></script>
     <div class="interview popup">
         <img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon" onclick="closeInterview()">
         <div class="icon"><img src="./img/quiz.svg" class="quiz-icon"></div>
@@ -31,6 +30,7 @@
         <script type="text/javascript">
             function onTelegramAuth(user) {
                 welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AТепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
+                let token = '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw';
                 let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${welcomeMessage}/`;
                 let api = new XMLHttpRequest();
                 api.open("GET", url, true);
@@ -106,6 +106,7 @@
     </main>
     <footer lang="en">Sopilka Tab Creator by <a href="https://youtube.com/c/MaggieFilms" target="_blank">Maggie
             Films</a> <em>☚</em> tutorials & tunes</footer>
+    <script src="main.js"></script>
 </body>
 
 </html>
