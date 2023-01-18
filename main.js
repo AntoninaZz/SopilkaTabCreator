@@ -41,7 +41,7 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 
 // entry point
-getData(window.location.href + 'data.json');
+getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -544,4 +544,9 @@ function showInterview() {
 
 function closeInterview() {
   interviewPopup.setAttribute("class", "interview popup");
+}
+
+function closeTest() {
+  document.getElementsByClassName("test")[0].setAttribute("class", "test popup");
+  // document.getElementsByClassName("test")[0].setAttribute("class", "test popup show");
 }
