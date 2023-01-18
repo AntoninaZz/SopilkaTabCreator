@@ -39,9 +39,10 @@ let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
+let token = '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw';
 
 // entry point
-getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
+getData(window.location.href + 'data.json');
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
