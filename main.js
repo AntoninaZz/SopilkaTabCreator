@@ -41,7 +41,7 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 
 // entry point
-getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
+getData(window.location.href + 'data.json');
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -529,7 +529,7 @@ function saveResults() {
           formData.append('photo', blob);
           formData.append('caption', caption);
           let request = new XMLHttpRequest();
-          request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${chat_id}`);
+          request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
           request.send(formData);
         });
       }
@@ -542,7 +542,7 @@ function saveResults() {
     window.print();
   }
   if (localStorage.getItem("chat_id")) {
-    let message = notes.value;
+    let message = notes.value.replaceAll('\n', '%0A');
     let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${message}`;
     let api = new XMLHttpRequest();
     api.open("GET", url, true);
