@@ -529,8 +529,9 @@ function saveResults() {
           canvas.toBlob(function (blob) {
             let formData = new FormData();
             formData.append('photo', blob);
-            formData.append('caption', notes.value.length <= 1024 ? notes.value : '');
+            formData.append('caption', notes.value);
             let request = new XMLHttpRequest();
+            request.addEventListener('error', handleError);
             request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
             request.send(formData);
           });
@@ -542,9 +543,9 @@ function saveResults() {
     window.print();
     if (localStorage.getItem("chat_id")) {
       let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A')}`;
-      let api = new XMLHttpRequest();
-      api.open("GET", url, true);
-      api.send();
+      let request = new XMLHttpRequest();
+      request.open("GET", url, true);
+      request.send();
     }
   }
 }
@@ -554,6 +555,15 @@ function showSaving(input) {
     saving.setAttribute('class', 'invisible');
   } else {
     saving.setAttribute('class', '');
+  }
+}
+
+function handleError() {
+  if (localStorage.getItem("chat_id")) {
+    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A')}`;
+    let request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.send();
   }
 }
 
