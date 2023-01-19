@@ -497,6 +497,7 @@ function addInfoSlides() {
 
 function saveResults() {
   let photo;
+  let caption = currentName;
   if (rbSaveToPng.checked) {
     localStorage.setItem("saveToPng", "true");
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
@@ -522,10 +523,16 @@ function saveResults() {
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
-      canvas.toBlob(function(blob){
-        photo = URL.createObjectURL(blob);
-        console.log(photo);
-      },'image/png');
+      if (canvas) {
+        canvas.toBlob(function (blob) {
+          let formData = new FormData();
+          formData.append('photo', blob);
+          formData.append('caption', caption);
+          let request = new XMLHttpRequest();
+          request.open('POST', `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${chat_id}`);
+          request.send(formData);
+        });
+      }
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
