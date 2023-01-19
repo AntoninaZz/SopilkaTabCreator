@@ -542,7 +542,7 @@ function saveResults() {
     window.print();
   }
   if (localStorage.getItem("chat_id")) {
-    let message = notes.value.replaceAll('\n', '%0A');
+    let message = notes.value.replaceAll('\n', '%0A').replace(caption, `<b>${caption}</b>`);
     let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${message}`;
     let api = new XMLHttpRequest();
     api.open("GET", url, true);
