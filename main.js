@@ -535,7 +535,8 @@ function saveResults() {
               formData.append('caption', notes.value);
               request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
             } else {
-              formData.append('document', blob);
+              let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
+              formData.append('document', file);
               request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
               sendMessage();
             }
@@ -546,8 +547,8 @@ function saveResults() {
     });
   } else {
     localStorage.removeItem("saveToPng");
-    window.print();
     sendMessage();
+    window.print();
   }
 }
 
