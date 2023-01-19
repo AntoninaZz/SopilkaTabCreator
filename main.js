@@ -496,8 +496,6 @@ function addInfoSlides() {
 }
 
 function saveResults() {
-  let photo;
-  let caption = currentName;
   if (rbSaveToPng.checked) {
     localStorage.setItem("saveToPng", "true");
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
@@ -523,30 +521,31 @@ function saveResults() {
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
-      if (canvas) {
-        canvas.toBlob(function (blob) {
-          let formData = new FormData();
-          formData.append('photo', blob);
-          formData.append('caption', caption);
-          let request = new XMLHttpRequest();
-          request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
-          request.send(formData);
-        });
-      }
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
+      if (localStorage.getItem("chat_id")) {
+        if (canvas) {
+          canvas.toBlob(function (blob) {
+            let formData = new FormData();
+            formData.append('photo', blob);
+            formData.append('caption', notes.value.replaceAll('\n', '%0A'));
+            let request = new XMLHttpRequest();
+            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+            request.send(formData);
+          });
+        }
+      }
     });
   } else {
     localStorage.removeItem("saveToPng");
     window.print();
-  }
-  if (localStorage.getItem("chat_id")) {
-    let message = notes.value.replaceAll('\n', '%0A').replace(caption, `**${caption}**`);
-    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${message}`;
-    let api = new XMLHttpRequest();
-    api.open("GET", url, true);
-    api.send();
+    if (localStorage.getItem("chat_id")) {
+      let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A')}`;
+      let api = new XMLHttpRequest();
+      api.open("GET", url, true);
+      api.send();
+    }
   }
 }
 
