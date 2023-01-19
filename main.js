@@ -561,7 +561,7 @@ function showSaving(input) {
 
 function sendMessage() {
   if (localStorage.getItem("chat_id")) {
-    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A')}`;
+    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A').replaceAll('#','%23')}`;
     let request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.send();
