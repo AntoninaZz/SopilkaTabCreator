@@ -528,11 +528,11 @@ function saveResults() {
         if (canvas) {
           canvas.toBlob(function (blob) {
             let formData = new FormData();
-            formData.append('photo', blob);
+            formData.append('document', blob);
             formData.append('caption', notes.value.length <= 1024 ? notes.value : '');
             let request = new XMLHttpRequest();
             request.addEventListener('error', handleError);
-            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
             request.send(formData);
           });
         }
