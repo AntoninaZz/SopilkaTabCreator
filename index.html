@@ -34,9 +34,9 @@
                     localStorage.setItem('token', '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw');
                     let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AТепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
                     let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
-                    let api = new XMLHttpRequest();
-                    api.open("GET", url, true);
-                    api.send();
+                    let request = new XMLHttpRequest();
+                    request.open("GET", url, true);
+                    request.send();
                 }
             }
         </script>
