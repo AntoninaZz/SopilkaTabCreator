@@ -25,17 +25,21 @@
     <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <div class="test popup">
         <img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon" onclick="closeTest()">
+        <div id="loggedIn" class="invisible"></div>
         <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="SopilkaTabCreatorBot"
             data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
         <script type="text/javascript">
             function onTelegramAuth(user) {
                 localStorage.setItem("chat_id", user.id);
                 localStorage.setItem('token', '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw');
-                let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot.Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
+                let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
                 let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
                 let request = new XMLHttpRequest();
                 request.open("GET", url, true);
                 request.send();
+                document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', 'invisible');
+                document.getElementById("loggedIn").innerHTML = `<p>Ви увійшли як <em>${user.first_name} ${user.last_name ? user.last_name : ''}</em>.</p><p>Тепер при збереженні аплікатурних схем вони автоматично надходитимуть на ваш telegram.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`;
+                document.getElementById("loggedIn").setAttribute('class', '');
             }
         </script>
     </div>
@@ -108,4 +112,5 @@
             Films</a> <em>☚</em> tutorials & tunes</footer>
     <script src="main.js"></script>
 </body>
+
 </html>
