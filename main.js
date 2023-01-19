@@ -529,7 +529,7 @@ function saveResults() {
           canvas.toBlob(function (blob) {
             let formData = new FormData();
             formData.append('photo', blob);
-            formData.append('caption', notes.value.replaceAll('\n', '%0A'));
+            formData.append('caption', notes.value);
             let request = new XMLHttpRequest();
             request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
             request.send(formData);
