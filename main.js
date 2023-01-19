@@ -569,6 +569,19 @@ function sendMessage() {
   }
 }
 
+function unsubscribe() {
+  if (localStorage.getItem("chat_id")) {
+    let goodbye = "Ви успішно відв'язали Sopilka Tab Creator Bot від сайту. Більше Ви не будете отримувати жодних сповіщень :(";
+    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${goodbye}`;
+    let request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.send();
+  }
+  localStorage.removeItem('chat_id');
+  document.getElementById("loggedIn").setAttribute('class', 'invisible');
+  document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
+}
+
 function showInterview() {
   interviewPopup.setAttribute("class", "interview popup show");
 }
