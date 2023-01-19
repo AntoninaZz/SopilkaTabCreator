@@ -516,7 +516,7 @@ function saveResults() {
       currentName = currentName.replaceAll('=', '');
       currentName = currentName.replaceAll(' ', '_');
       for (let char of currentName) {
-        filename += transliteration[char] || char;
+        filename += transliteration[char] === undefined ? char : transliteration[char];
       }
       let link = document.createElement("a");
       document.body.appendChild(link);
