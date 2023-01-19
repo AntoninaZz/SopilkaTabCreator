@@ -528,11 +528,17 @@ function saveResults() {
         if (canvas) {
           canvas.toBlob(function (blob) {
             let formData = new FormData();
-            formData.append('document', blob);
-            formData.append('caption', notes.value.length <= 1024 ? notes.value : '');
             let request = new XMLHttpRequest();
-            request.addEventListener('error', handleError);
-            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+            request.addEventListener('error', sendMessage);
+            if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+              formData.append('photo', blob);
+              formData.append('caption', notes.value);
+              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+            } else {
+              formData.append('document', blob);
+              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+              sendMessage();
+            }
             request.send(formData);
           });
         }
@@ -541,12 +547,7 @@ function saveResults() {
   } else {
     localStorage.removeItem("saveToPng");
     window.print();
-    if (localStorage.getItem("chat_id")) {
-      let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A')}`;
-      let request = new XMLHttpRequest();
-      request.open("GET", url, true);
-      request.send();
-    }
+    sendMessage();
   }
 }
 
@@ -558,7 +559,7 @@ function showSaving(input) {
   }
 }
 
-function handleError() {
+function sendMessage() {
   if (localStorage.getItem("chat_id")) {
     let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A')}`;
     let request = new XMLHttpRequest();
