@@ -24,7 +24,6 @@ let spacing = document.getElementById("spacing");
 let whiteBg = document.getElementById("whiteBg");
 let showNotesSlider = document.getElementById("showNotes");
 let description = document.getElementById("description");
-let tglogin = await getTgLogin();
 let tglogout = document.getElementById("tglogout");
 let labelTune = document.querySelectorAll('[for="tune"]')[0];
 let labelLang = document.querySelectorAll('[for="lang"]')[0];
@@ -41,10 +40,10 @@ let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
+let tglogin;
 
 // entry point
 getData(window.location.href + 'data.json');
-getTgLogin();
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -73,6 +72,10 @@ async function getData(url) {
   optionOwnTune = document.querySelectorAll('[value="byHand"]')[0];
 
   getSettingsFromLocalStorage();
+
+  getTgLogin().then((elm) => {
+    tglogin = elm; 
+  });
 }
 
 async function getTgLogin() {
