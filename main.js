@@ -42,7 +42,7 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 
 // entry point
-getData('window.location.href + 'data.json'');
+getData('window.location.href + 'data.json');
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
