@@ -73,6 +73,7 @@ async function getData(url) {
 
   getTgLogin().then((elm) => {
     tglogin = elm; 
+    console.log(elm);
   });
 
   getSettingsFromLocalStorage();
