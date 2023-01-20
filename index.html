@@ -38,7 +38,7 @@
                 request.open("GET", url, true);
                 request.send();
                 document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', 'invisible');
-                document.getElementById("tglogout").innerHTML = `<p>Ви увійшли як <em>${user.first_name} ${user.last_name ? user.last_name : ''}</em>.</p><p>Тепер при збереженні аплікатурних схем вони автоматично надходитимуть на ваш telegram.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`;
+                document.getElementById("tglogout").innerHTML = `<p>Ви увійшли як <em>${user.first_name} ${user.last_name ? user.last_name : ''}</em></p><p>Тепер при збереженні аплікатурних схем вони автоматично надходитимуть на ваш <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`;
                 document.getElementById("tglogout").setAttribute('class', '');
             }
         </script>
