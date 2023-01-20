@@ -71,11 +71,11 @@ async function getData(url) {
   optionScaleE = document.querySelectorAll('[value="scaleE"]')[0];
   optionOwnTune = document.querySelectorAll('[value="byHand"]')[0];
 
-  getSettingsFromLocalStorage();
-
   getTgLogin().then((elm) => {
     tglogin = elm; 
   });
+
+  getSettingsFromLocalStorage();
 }
 
 async function getTgLogin() {
