@@ -40,7 +40,6 @@ let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
-let tglogin;
 
 // entry point
 getData(window.location.href + 'data.json');
@@ -71,20 +70,7 @@ async function getData(url) {
   optionScaleE = document.querySelectorAll('[value="scaleE"]')[0];
   optionOwnTune = document.querySelectorAll('[value="byHand"]')[0];
 
-  getTgLogin().then((elm) => {
-    tglogin = elm; 
-    console.log(elm);
-  });
-
   getSettingsFromLocalStorage();
-}
-
-async function getTgLogin() {
-  return new Promise(resolve => {
-    if (document.getElementById("telegram-login-SopilkaTabCreatorBot")) {
-        return resolve(document.getElementById("telegram-login-SopilkaTabCreatorBot"));
-    }
-});
 }
 
 function getSettingsFromLocalStorage() {
@@ -135,11 +121,11 @@ function getSettingsFromLocalStorage() {
   }
 
   if(localStorage.getItem("chat_id")) {
-    tglogin.setAttribute('class', 'invisible');
+    document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', 'invisible');
     tglogout.setAttribute('class', '');
   } else {
     tglogout.setAttribute('class', 'invisible');
-    tglogin.setAttribute('class', '');
+    document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
   }
 }
 
@@ -602,7 +588,7 @@ function unsubscribe() {
   }
   localStorage.removeItem('chat_id');
   tglogout.setAttribute('class', 'invisible');
-  tglogin.setAttribute('class', '');
+  document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
 }
 
 function showInterview() {
