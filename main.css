@@ -251,7 +251,7 @@ select {
   border-radius: 3px;
 }
 
-#saving #btnSave {
+input[type="button"] {
   background-color: firebrick;
   border: none;
   color: white;
@@ -266,11 +266,11 @@ select {
   width: 100%;
 }
 
-#saving #btnSave:hover {
+input[type="button"]:hover {
   background-color: rgb(150, 30, 30);
 }
 
-#saving #btnSave:active {
+input[type="button"]:active {
   background-color: rgb(124, 24, 24);
 }
 
