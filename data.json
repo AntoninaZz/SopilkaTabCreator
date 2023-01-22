@@ -154,20 +154,20 @@
             "en": "Sopilka type"
         },
         "settings": {
-            "uk": "Налаштування",
-            "en": "Settings"
+            "uk": "<img src='./img/settings.svg' alt='settings'>Налаштування",
+            "en": "<img src='./img/settings.svg' alt='settings'>Settings"
         },
         "info": {
-            "uk": "Довідка",
-            "en": "Help"
+            "uk": "<img src='./img/info.svg' alt='info'>Довідка",
+            "en": "<img src='./img/info.svg' alt='info'>Help"
         },
         "feedback": {
-            "uk": "Залишити відгук",
-            "en": "Leave feedback"
+            "uk": "<img src='./img/feedback.svg' alt='feedback'>Залишити відгук",
+            "en": "<img src='./img/feedback.svg' alt='feedback'>Leave feedback"
         },
         "bugreport": {
-            "uk": "Повідомити про баг",
-            "en": "Report a bug"
+            "uk": "<img src='./img/bugreport.svg' alt='bugreport'>Повідомити про баг",
+            "en": "<img src='./img/bugreport.svg' alt='bugreport'>Report a bug"
         },
         "lang": {
             "uk": "Мова",
