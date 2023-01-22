@@ -115,7 +115,12 @@
     margin-bottom: 30px;
 }
 
+#tglogout {
+    width: 95%;
+    font-size: 12px;
+}
+
 #btnUnsubscribe {
-    width: fit-content;
+    max-width: fit-content;
     border-radius: 50px;
 }
