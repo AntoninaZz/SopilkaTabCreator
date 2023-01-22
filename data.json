@@ -145,9 +145,29 @@
             "uk": "Мелодія",
             "en": "Tune"
         },
+        "byHand": {
+            "uk": "Власна мелодія",
+            "en": "Your own tune"
+        },
         "sopilkaType": {
             "uk": "Сопілка",
             "en": "Sopilka type"
+        },
+        "settings": {
+            "uk": "Налаштування",
+            "en": "Settings"
+        },
+        "info": {
+            "uk": "Довідка",
+            "en": "Help"
+        },
+        "feedback": {
+            "uk": "Залишити відгук",
+            "en": "Leave feedback"
+        },
+        "bugreport": {
+            "uk": "Повідомити про баг",
+            "en": "Report a bug"
         },
         "lang": {
             "uk": "Мова",
@@ -165,17 +185,17 @@
             "uk": "Показувати ноти",
             "en": "Show notes"
         },
-        "byHand": {
-            "uk": "Власна мелодія",
-            "en": "Your own tune"
+        "duplicateToTg": {
+            "uk": "Завжди зберігати у telegram",
+            "en": "Always save to telegram"
         },
         "btnSave": {
             "uk": "Зберегти",
             "en": "Save"
         },
         "chooseFormat": {
-            "uk": "Зберегти як <label for='pdf'>PDF</label> <label for='png'>PNG</label>",
-            "en": "Save as <label for='pdf'>PDF</label> <label for='png'>PNG</label>"
+            "uk": "Зберегти як <label for='pdf'>PDF</label> <label for='png'>PNG</label> <label for='tg'>TG</label>",
+            "en": "Save as <label for='pdf'>PDF</label> <label for='png'>PNG</label> <label for='tg'>TG</label>"
         }
     },
     "infoSlides": {
