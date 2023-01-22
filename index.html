@@ -34,12 +34,9 @@
         <label class="menuBtn" for="menuToggle"><span></span></label>
         <div class="sidebar">
             <img src="./img/avatar.svg" alt="Profile Picture" id="profilePhoto">
-            <div style="color: firebrick; font-size: 12px; padding: 20px;">Якщо ви бачите цей текст, то розробка
-                функціоналу
-                даного вікна все ще триває. Будь ласка, не використовуйте поки це вікно. Дякую за розуміння.</div>
             <div id="tglogout" class="invisible"></div>
             <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="SopilkaTabCreatorBot"
-                data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+                data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
             <script type="text/javascript">
                 function onTelegramAuth(user) {
                     if (user.photo_url) {
