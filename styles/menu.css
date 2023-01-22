@@ -108,19 +108,25 @@
 
 #profilePhoto {
     border-radius: 50%;
-    outline: solid 3.5px #888;
+    outline: solid 3.5px firebrick;
     outline-offset: -3.5px;
     width: 50px;
     height: 50px;
     margin-bottom: 30px;
 }
 
+#profilePhoto[src='./img/avatar.svg'] {
+    outline-color: #888;
+}
+
 #tglogout {
-    width: 95%;
+    width: 75%;
     font-size: 12px;
+    text-align: center;
 }
 
 #btnUnsubscribe {
     max-width: fit-content;
+    height: auto;
     border-radius: 50px;
 }
