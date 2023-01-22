@@ -18,19 +18,27 @@ let saving = document.getElementById("saving");
 let sopilkaTypeChanger = document.getElementById("sopilkaTypeChanger");
 let chooseFormat = document.getElementById("chooseFormat");
 let rbSaveToPng = document.getElementById("png");
+let rbSaveToTg = document.getElementById("tg");
 let info = document.getElementById("info");
 let settings = document.getElementById("settings");
 let spacing = document.getElementById("spacing");
 let whiteBg = document.getElementById("whiteBg");
-let showNotesSlider = document.getElementById("showNotes");
+let showNotesSwitch = document.getElementById("showNotes");
+let duplicateToTgSwitch = document.getElementById("duplicateToTg");
 let description = document.getElementById("description");
 let tglogout = document.getElementById("tglogout");
+let profilePhoto = document.getElementById("profilePhoto");
+let labelFeedback = document.getElementById("feedback");
+let labelBugreport = document.getElementById("bugreport");
 let labelTune = document.querySelectorAll('[for="tune"]')[0];
 let labelLang = document.querySelectorAll('[for="lang"]')[0];
 let labelSopilkaType = document.querySelectorAll('[for="sopilkaType"]')[0];
 let labelSpacing = document.querySelectorAll('[for="spacing"]')[0];
 let labelWhiteBg = document.querySelectorAll('[for="whiteBg"]')[0];
-let labelShowNotesSlider = document.querySelectorAll('[for="showNotes"]')[0];
+let labelShowNotesSwitch = document.querySelectorAll('[for="showNotes"]')[0];
+let labelduplicateToTg = document.querySelectorAll('[for="duplicateToTg"]')[0];
+let labelSettings = document.querySelectorAll('label.menuItem[for="settings"]')[0];
+let labelInfo = document.querySelectorAll('label.menuItem[for="info"]')[0];
 let infoPopup = document.getElementsByClassName("info")[0];
 let interviewPopup = document.getElementsByClassName("interview")[0];
 let optionScaleB;
@@ -40,9 +48,10 @@ let currentLang = 'uk';
 let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
+let duplToTg = false;
 
 // entry point
-getData(window.location.href + 'data.json');
+getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -80,7 +89,7 @@ function getSettingsFromLocalStorage() {
   }
 
   if (localStorage.getItem('showNotes')) {
-    showNotesSlider.checked = false;
+    showNotesSwitch.checked = false;
   }
 
   if (localStorage.getItem('spacing')) {
@@ -116,17 +125,33 @@ function getSettingsFromLocalStorage() {
     changeLang(currentLang);
   }
 
-  if (localStorage.getItem('saveToPng')) {
-    rbSaveToPng.checked = true;
+  switch (localStorage.getItem('saveTo')) {
+    case rbSaveToPng.id:
+      rbSaveToPng.checked = true;
+      break;
+    case rbSaveToTg.id:
+      rbSaveToTg.checked = true;
+      break;
+    default:
+      break;
   }
 
-  if(localStorage.getItem("chat_id")) {
+  if (localStorage.getItem('duplToTg')) {
+    duplToTg = JSON.parse(localStorage.getItem('duplToTg'));
+  }
+  duplicateToTgSwitch.checked = duplToTg;
+
+  if (localStorage.getItem("chat_id")) {
     document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', 'invisible');
     tglogout.setAttribute('class', '');
     tglogout.innerHTML = localStorage.getItem("tglogout");
   } else {
     tglogout.setAttribute('class', 'invisible');
     document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
+  }
+
+  if (localStorage.getItem("profilePhoto")) {
+    profilePhoto.src = localStorage.getItem("profilePhoto");
   }
 }
 
@@ -360,16 +385,21 @@ function changeLang(newLang) {
   slogan.setAttribute("class", `lang-${currentLang}`);
   description.innerHTML = contentTranslation[description.id][currentLang];
   labelTune.innerText = contentTranslation[labelTune.getAttribute('for')][currentLang];
-  labelLang.innerText = contentTranslation[labelLang.getAttribute('for')][currentLang];
-  labelSopilkaType.innerText = contentTranslation[labelSopilkaType.getAttribute('for')][currentLang];
-  labelSpacing.innerText = contentTranslation[labelSpacing.getAttribute('for')][currentLang];
-  labelWhiteBg.innerText = contentTranslation[labelWhiteBg.getAttribute('for')][currentLang];
-  labelShowNotesSlider.innerText = contentTranslation[labelShowNotesSlider.getAttribute('for')][currentLang];
   optionScaleB.innerText = tunes[optionScaleB.getAttribute('value')].name[currentLang];
   optionScaleE.innerText = tunes[optionScaleE.getAttribute('value')].name[currentLang];
   optionOwnTune.innerText = contentTranslation[optionOwnTune.getAttribute('value')][currentLang];
-  chooseFormat.innerHTML = contentTranslation[chooseFormat.id][currentLang];
+  labelSopilkaType.innerText = contentTranslation[labelSopilkaType.getAttribute('for')][currentLang];
+  labelSettings.innerHTML = contentTranslation[labelSettings.getAttribute('for')][currentLang];
+  labelInfo.innerHTML = contentTranslation[labelInfo.getAttribute('for')][currentLang];
+  labelFeedback.innerHTML = contentTranslation[labelFeedback.id][currentLang];
+  labelBugreport.innerHTML = contentTranslation[labelBugreport.id][currentLang];
+  labelLang.innerText = contentTranslation[labelLang.getAttribute('for')][currentLang];
+  labelSpacing.innerText = contentTranslation[labelSpacing.getAttribute('for')][currentLang];
+  labelWhiteBg.innerText = contentTranslation[labelWhiteBg.getAttribute('for')][currentLang];
+  labelShowNotesSwitch.innerText = contentTranslation[labelShowNotesSwitch.getAttribute('for')][currentLang];
+  labelduplicateToTg.innerText = contentTranslation[labelduplicateToTg.getAttribute('for')][currentLang];
   btnSave.setAttribute('value', contentTranslation[btnSave.id][currentLang]);
+  chooseFormat.innerHTML = contentTranslation[chooseFormat.id][currentLang];
   for (let slide in infoSlides) {
     document.getElementById(slide).innerHTML = infoSlides[slide][currentLang];
   }
@@ -426,16 +456,6 @@ function normalizeInput(input) {
   getCurrentName(input);
 }
 
-function singlePopup(element) {
-  if (info.checked && settings.checked) {
-    if (element == info) {
-      settings.checked = false;
-    } else {
-      info.checked = false;
-    }
-  }
-}
-
 function changeSpacing(range) {
   currentSpacing = range.value;
   localStorage.setItem("spacing", currentSpacing);
@@ -459,6 +479,11 @@ function showNotes(show) {
     localStorage.setItem("showNotes", "false");
   }
   showTabs(notes.value);
+}
+
+function duplicateToTg(checked) {
+  duplToTg = checked;
+  localStorage.setItem('duplToTg', checked);
 }
 
 function addInfoSlides() {
@@ -506,58 +531,60 @@ function addInfoSlides() {
 }
 
 function saveResults() {
+  filename = getFilename();
   if (rbSaveToPng.checked) {
-    localStorage.setItem("saveToPng", "true");
+    localStorage.setItem("saveTo", rbSaveToPng.id);
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
-      filename = '';
-      currentName = currentName.replaceAll('/', '');
-      currentName = currentName.replaceAll('\\', '');
-      currentName = currentName.replaceAll('?', '');
-      currentName = currentName.replaceAll('%', '');
-      currentName = currentName.replaceAll('*', '');
-      currentName = currentName.replaceAll(':', '');
-      currentName = currentName.replaceAll('|', '');
-      currentName = currentName.replaceAll('"', '');
-      currentName = currentName.replaceAll('<', '');
-      currentName = currentName.replaceAll('>', '');
-      currentName = currentName.replaceAll('.', '');
-      currentName = currentName.replaceAll(',', '');
-      currentName = currentName.replaceAll(';', '');
-      currentName = currentName.replaceAll('=', '');
-      currentName = currentName.replaceAll(' ', '_');
-      for (let char of currentName) {
-        filename += transliteration[char] === undefined ? char : transliteration[char];
-      }
       let link = document.createElement("a");
       document.body.appendChild(link);
       link.href = canvas.toDataURL();
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
-      if (localStorage.getItem("chat_id")) {
-        if (canvas) {
-          canvas.toBlob(function (blob) {
-            let formData = new FormData();
-            let request = new XMLHttpRequest();
-            request.addEventListener('error', sendMessage);
-            if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
-              formData.append('photo', blob);
-              formData.append('caption', notes.value);
-              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
-            } else {
-              let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
-              formData.append('document', file);
-              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
-              sendMessage();
-            }
-            request.send(formData);
-          });
-        }
+      if (duplToTg && localStorage.getItem("chat_id") && canvas) {
+        canvas.toBlob(function (blob) {
+          let formData = new FormData();
+          let request = new XMLHttpRequest();
+          request.addEventListener('error', sendMessage);
+          if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+            formData.append('photo', blob);
+            formData.append('caption', notes.value);
+            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+          } else {
+            let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
+            formData.append('document', file);
+            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+            sendMessage();
+          }
+          request.send(formData);
+        });
+      }
+    });
+  } else if (rbSaveToTg.checked) {
+    localStorage.setItem("saveTo", rbSaveToTg.id);
+    html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
+      if (localStorage.getItem("chat_id") && canvas) {
+        canvas.toBlob(function (blob) {
+          let formData = new FormData();
+          let request = new XMLHttpRequest();
+          request.addEventListener('error', sendMessage);
+          if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+            formData.append('photo', blob);
+            formData.append('caption', notes.value);
+            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+          } else {
+            let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
+            formData.append('document', file);
+            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+            sendMessage();
+          }
+          request.send(formData);
+        });
       }
     });
   } else {
-    localStorage.removeItem("saveToPng");
-    sendMessage();
+    localStorage.setItem("saveTo", "pdf");
+    if (duplToTg) { sendMessage(); }
     window.print();
   }
 }
@@ -572,11 +599,34 @@ function showSaving(input) {
 
 function sendMessage() {
   if (localStorage.getItem("chat_id")) {
-    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A').replaceAll('#','%23')}`;
+    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A').replaceAll('#', '%23')}`;
     let request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.send();
   }
+}
+
+function getFilename() {
+  let filename = '';
+  currentName = currentName.replaceAll('/', '');
+  currentName = currentName.replaceAll('\\', '');
+  currentName = currentName.replaceAll('?', '');
+  currentName = currentName.replaceAll('%', '');
+  currentName = currentName.replaceAll('*', '');
+  currentName = currentName.replaceAll(':', '');
+  currentName = currentName.replaceAll('|', '');
+  currentName = currentName.replaceAll('"', '');
+  currentName = currentName.replaceAll('<', '');
+  currentName = currentName.replaceAll('>', '');
+  currentName = currentName.replaceAll('.', '');
+  currentName = currentName.replaceAll(',', '');
+  currentName = currentName.replaceAll(';', '');
+  currentName = currentName.replaceAll('=', '');
+  currentName = currentName.replaceAll(' ', '_');
+  for (let char of currentName) {
+    filename += transliteration[char] === undefined ? char : transliteration[char];
+  }
+  return filename;
 }
 
 function unsubscribe() {
@@ -588,8 +638,18 @@ function unsubscribe() {
     request.send();
   }
   localStorage.removeItem('chat_id');
+  localStorage.removeItem('profilePhoto');
+  localStorage.removeItem('tglogout');
   tglogout.setAttribute('class', 'invisible');
   document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
+}
+
+function closePopup() {
+  if (info.checked) {
+    info.checked = false;
+  } else if (settings.checked) {
+    settings.checked = false;
+  }
 }
 
 function showInterview() {
@@ -598,10 +658,4 @@ function showInterview() {
 
 function closeInterview() {
   interviewPopup.setAttribute("class", "interview popup");
-}
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-function closeTest() {
-  document.getElementsByClassName("test")[0].setAttribute("class", "test popup");
-  // document.getElementsByClassName("test")[0].setAttribute("class", "test popup show");
 }
