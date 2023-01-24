@@ -665,6 +665,7 @@ function unsubscribe() {
   localStorage.removeItem('name');
   tglogout.setAttribute('class', 'invisible');
   tglogin.setAttribute('class', '');
+  profilePhoto.setAttribute('src', './img/avatar.svg');
 }
 
 function showErr() {
