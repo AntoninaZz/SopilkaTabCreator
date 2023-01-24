@@ -56,7 +56,7 @@
                     }
                     localStorage.setItem("chat_id", user.id);
                     localStorage.setItem('token', '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw');
-                    localStorage.setItem("tglogout", `<p>Ви увійшли як <em>${user.first_name} ${user.last_name ? user.last_name : ''}</em></p><p>Тепер при збереженні аплікатурних схем вони автоматично надходитимуть на ваш <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`)
+                    localStorage.setItem("tglogout", `<p>Ви увійшли як <em>${user.first_name} ${user.last_name ? user.last_name : ''}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`)
                     let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично дублюватимуться у цей чат.`;
                     let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
                     let request = new XMLHttpRequest();
