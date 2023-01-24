@@ -50,7 +50,7 @@ let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
 let duplToTg = false;
-let tgIframe;
+let tglogin;
 
 // entry point
 getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
@@ -144,21 +144,18 @@ function getSettingsFromLocalStorage() {
   duplicateToTgSwitch.checked = duplToTg;
 
   waitForTg().then((iframe) => {
-    console.log('Element appeared', iframe);
-    tgIframe = iframe;
-    tgIframe.addEventListener("load", function() {
-      tgIframe = document.getElementById("telegram-login-SopilkaTabCreatorBot");
-      console.log('Content loaded', tgIframe);
+    iframe.addEventListener("load", function() {
+      tglogin = document.getElementById("telegram-login-SopilkaTabCreatorBot");
     });
   });
 
   if (localStorage.getItem("chat_id")) {
-    document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', 'invisible');
+    tglogin.setAttribute('class', 'invisible');
     tglogout.setAttribute('class', '');
     tglogout.innerHTML = localStorage.getItem("tglogout");
   } else {
     tglogout.setAttribute('class', 'invisible');
-    document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
+    tglogin.setAttribute('class', '');
   }
 
   if (localStorage.getItem("profilePhoto")) {
@@ -662,7 +659,7 @@ function unsubscribe() {
   localStorage.removeItem('profilePhoto');
   localStorage.removeItem('tglogout');
   tglogout.setAttribute('class', 'invisible');
-  document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
+  tglogin.setAttribute('class', '');
 }
 
 function showErr() {
