@@ -126,7 +126,5 @@
 }
 
 #btnUnsubscribe {
-    max-width: fit-content;
-    height: auto;
     border-radius: 50px;
 }
