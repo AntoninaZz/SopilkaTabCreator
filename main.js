@@ -548,7 +548,7 @@ function saveResults() {
             let formData = new FormData();
             let request = new XMLHttpRequest();
             request.addEventListener('error', sendMessage);
-            if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+            if (tabs.offsetHeight <= 24 * tabs.offsetWidth / 9) {
               formData.append('photo', blob);
               formData.append('caption', notes.value);
               request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
@@ -574,7 +574,7 @@ function saveResults() {
             let formData = new FormData();
             let request = new XMLHttpRequest();
             request.addEventListener('error', sendMessage);
-            if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+            if (tabs.offsetHeight <= 24 * tabs.offsetWidth / 9) {
               formData.append('photo', blob);
               formData.append('caption', notes.value);
               request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
