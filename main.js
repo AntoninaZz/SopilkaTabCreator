@@ -412,6 +412,7 @@ function changeLang(newLang) {
   labelduplicateToTg.innerText = contentTranslation[labelduplicateToTg.getAttribute('for')][currentLang];
   btnSave.setAttribute('value', contentTranslation[btnSave.id][currentLang]);
   chooseFormat.innerHTML = contentTranslation[chooseFormat.id][currentLang];
+  requaireLogin.innerHTML = contentTranslation[requaireLogin.id][currentLang];
   for (let slide in infoSlides) {
     document.getElementById(slide).innerHTML = infoSlides[slide][currentLang];
   }
@@ -718,7 +719,7 @@ function onTelegramAuth(user) {
   localStorage.setItem("chat_id", user.id);
   localStorage.setItem('token', '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw');
   localStorage.setItem("name", `${user.first_name} ${user.last_name ? user.last_name : ''}`);
-  let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми надходитимуть у цей чат.`;
+  let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично надходитимуть у цей чат.`;
   let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
   let request = new XMLHttpRequest();
   request.open("GET", url, true);
