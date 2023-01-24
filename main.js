@@ -30,6 +30,7 @@ let tglogout = document.getElementById("tglogout");
 let profilePhoto = document.getElementById("profilePhoto");
 let labelFeedback = document.getElementById("feedback");
 let labelBugreport = document.getElementById("bugreport");
+let requaireLogin = document.getElementById("requaireLogin");
 let labelTune = document.querySelectorAll('[for="tune"]')[0];
 let labelLang = document.querySelectorAll('[for="lang"]')[0];
 let labelSopilkaType = document.querySelectorAll('[for="sopilkaType"]')[0];
@@ -541,45 +542,53 @@ function saveResults() {
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
-      if (duplToTg && localStorage.getItem("chat_id") && canvas) {
-        canvas.toBlob(function (blob) {
-          let formData = new FormData();
-          let request = new XMLHttpRequest();
-          request.addEventListener('error', sendMessage);
-          if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
-            formData.append('photo', blob);
-            formData.append('caption', notes.value);
-            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
-          } else {
-            let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
-            formData.append('document', file);
-            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
-            sendMessage();
-          }
-          request.send(formData);
-        });
+      if (duplToTg && canvas) {
+        if (localStorage.getItem("chat_id")) {
+          canvas.toBlob(function (blob) {
+            let formData = new FormData();
+            let request = new XMLHttpRequest();
+            request.addEventListener('error', sendMessage);
+            if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+              formData.append('photo', blob);
+              formData.append('caption', notes.value);
+              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+            } else {
+              let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
+              formData.append('document', file);
+              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+              sendMessage();
+            }
+            request.send(formData);
+          });
+        } else {
+          showErr();
+        }
       }
     });
   } else if (rbSaveToTg.checked) {
     localStorage.setItem("saveTo", rbSaveToTg.id);
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
-      if (localStorage.getItem("chat_id") && canvas) {
-        canvas.toBlob(function (blob) {
-          let formData = new FormData();
-          let request = new XMLHttpRequest();
-          request.addEventListener('error', sendMessage);
-          if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
-            formData.append('photo', blob);
-            formData.append('caption', notes.value);
-            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
-          } else {
-            let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
-            formData.append('document', file);
-            request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
-            sendMessage();
-          }
-          request.send(formData);
-        });
+      if (localStorage.getItem("chat_id")) {
+        if (canvas) {
+          canvas.toBlob(function (blob) {
+            let formData = new FormData();
+            let request = new XMLHttpRequest();
+            request.addEventListener('error', sendMessage);
+            if (tabs.offsetHeight <= 16 * tabs.offsetWidth / 9) {
+              formData.append('photo', blob);
+              formData.append('caption', notes.value);
+              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+            } else {
+              let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
+              formData.append('document', file);
+              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+              sendMessage();
+            }
+            request.send(formData);
+          });
+        }
+      } else {
+        showErr();
       }
     });
   } else {
@@ -603,6 +612,8 @@ function sendMessage() {
     let request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.send();
+  } else {
+    showErr();
   }
 }
 
@@ -642,6 +653,14 @@ function unsubscribe() {
   localStorage.removeItem('tglogout');
   tglogout.setAttribute('class', 'invisible');
   document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', '');
+}
+
+function showErr() {
+  requaireLogin.setAttribute('class', 'error');
+}
+
+function closeErr() {
+  requaireLogin.setAttribute('class', 'error invisible');
 }
 
 function closePopup() {
