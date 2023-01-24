@@ -127,4 +127,5 @@
 
 #btnUnsubscribe {
     border-radius: 50px;
+    white-space: normal;
 }
