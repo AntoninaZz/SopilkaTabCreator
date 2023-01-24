@@ -146,6 +146,7 @@ function getSettingsFromLocalStorage() {
   waitForTg().then((iframe) => {
     iframe.addEventListener("load", function() {
       tglogin = document.getElementById("telegram-login-SopilkaTabCreatorBot");
+      console.log(tglogin);
     });
   });
 
