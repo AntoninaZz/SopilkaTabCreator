@@ -50,6 +50,7 @@ let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
 let duplToTg = false;
+let tgIframe;
 
 // entry point
 getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
@@ -141,6 +142,15 @@ function getSettingsFromLocalStorage() {
     duplToTg = JSON.parse(localStorage.getItem('duplToTg'));
   }
   duplicateToTgSwitch.checked = duplToTg;
+
+  waitForTg().then((iframe) => {
+    console.log('Element appeared', iframe);
+    tgIframe = iframe;
+    tgIframe.addEventListener("load", function() {
+      tgIframe = document.getElementById("telegram-login-SopilkaTabCreatorBot");
+      console.log('Content loaded', tgIframe);
+    });
+  });
 
   if (localStorage.getItem("chat_id")) {
     document.getElementById("telegram-login-SopilkaTabCreatorBot").setAttribute('class', 'invisible');
@@ -677,4 +687,24 @@ function showInterview() {
 
 function closeInterview() {
   interviewPopup.setAttribute("class", "interview popup");
+}
+
+function waitForTg() {
+  return new Promise(resolve => {
+    if (document.getElementById("telegram-login-SopilkaTabCreatorBot")) {
+      return resolve(document.getElementById("telegram-login-SopilkaTabCreatorBot"));
+    }
+
+    const observer = new MutationObserver(mutations => {
+      if (document.getElementById("telegram-login-SopilkaTabCreatorBot")) {
+        resolve(document.getElementById("telegram-login-SopilkaTabCreatorBot"));
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
 }
