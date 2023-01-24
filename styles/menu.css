@@ -135,3 +135,7 @@
     display: block;
     padding: 9px 24px;
 }
+
+.tgme_widget_login_button {
+    margin: 12px 0;
+}
