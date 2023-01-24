@@ -51,6 +51,10 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 let duplToTg = false;
 let tglogin;
+let logoutContent = {
+  uk: `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`,
+  en: `<p>You logged in as <em>${localStorage.getItem("name")}</em></p><p>Now you can save your tabs to <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Log out" onclick="unsubscribe()">`
+};
 
 // entry point
 getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
@@ -144,12 +148,12 @@ function getSettingsFromLocalStorage() {
   duplicateToTgSwitch.checked = duplToTg;
 
   waitForTg().then((iframe) => {
-    iframe.addEventListener("load", function() {
+    iframe.addEventListener("load", function () {
       tglogin = document.getElementById("telegram-login-SopilkaTabCreatorBot");
       if (localStorage.getItem("chat_id")) {
         tglogin.setAttribute('class', 'invisible');
         tglogout.setAttribute('class', '');
-        tglogout.innerHTML = localStorage.getItem("tglogout");
+        tglogout.innerHTML = logoutContent[currentLang];
       } else {
         tglogout.setAttribute('class', 'invisible');
         tglogin.setAttribute('class', '');
@@ -396,6 +400,7 @@ function changeLang(newLang) {
   optionScaleE.innerText = tunes[optionScaleE.getAttribute('value')].name[currentLang];
   optionOwnTune.innerText = contentTranslation[optionOwnTune.getAttribute('value')][currentLang];
   labelSopilkaType.innerText = contentTranslation[labelSopilkaType.getAttribute('for')][currentLang];
+  tglogout.innerHTML = logoutContent[currentLang];
   labelSettings.innerHTML = contentTranslation[labelSettings.getAttribute('for')][currentLang];
   labelInfo.innerHTML = contentTranslation[labelInfo.getAttribute('for')][currentLang];
   labelFeedback.innerHTML = contentTranslation[labelFeedback.id][currentLang];
@@ -656,7 +661,7 @@ function unsubscribe() {
   }
   localStorage.removeItem('chat_id');
   localStorage.removeItem('profilePhoto');
-  localStorage.removeItem('tglogout');
+  localStorage.removeItem('name');
   tglogout.setAttribute('class', 'invisible');
   tglogin.setAttribute('class', '');
 }
@@ -703,4 +708,22 @@ function waitForTg() {
       subtree: true
     });
   });
+}
+
+function onTelegramAuth(user) {
+  if (user.photo_url) {
+    profilePhoto.setAttribute('src', user.photo_url);
+    localStorage.setItem('profilePhoto', user.photo_url);
+  }
+  localStorage.setItem("chat_id", user.id);
+  localStorage.setItem('token', '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw');
+  localStorage.setItem("name", `${user.first_name} ${user.last_name ? user.last_name : ''}`);
+  let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми надходитимуть у цей чат.`;
+  let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
+  let request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.send();
+  tglogin.setAttribute('class', 'invisible');
+  tglogout.innerHTML = localStorage.getItem('lang') === 'en' ? `<p>You logged in as <em>${localStorage.getItem("name")}</em></p><p>Now you can save your tabs to <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Log out" onclick="unsubscribe()">` : `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`;
+  tglogout.setAttribute('class', '');
 }
