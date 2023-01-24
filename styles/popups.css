@@ -111,6 +111,12 @@ input[type="checkbox"] {
     opacity: 0.5;
 }
 
+.settings label[for="whiteBg"],
+.settings label[for="showNotes"],
+.settings label[for="duplicateToTg"] {
+    cursor: pointer;
+}
+
 .interview .icon {
     height: 100px;
     width: 100px;
