@@ -126,5 +126,6 @@
 }
 
 #btnUnsubscribe {
+    display: block;
     border-radius: 50px;
 }
