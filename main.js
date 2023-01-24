@@ -146,18 +146,16 @@ function getSettingsFromLocalStorage() {
   waitForTg().then((iframe) => {
     iframe.addEventListener("load", function() {
       tglogin = document.getElementById("telegram-login-SopilkaTabCreatorBot");
-      console.log(tglogin);
+      if (localStorage.getItem("chat_id")) {
+        tglogin.setAttribute('class', 'invisible');
+        tglogout.setAttribute('class', '');
+        tglogout.innerHTML = localStorage.getItem("tglogout");
+      } else {
+        tglogout.setAttribute('class', 'invisible');
+        tglogin.setAttribute('class', '');
+      }
     });
   });
-
-  if (localStorage.getItem("chat_id")) {
-    tglogin.setAttribute('class', 'invisible');
-    tglogout.setAttribute('class', '');
-    tglogout.innerHTML = localStorage.getItem("tglogout");
-  } else {
-    tglogout.setAttribute('class', 'invisible');
-    tglogin.setAttribute('class', '');
-  }
 
   if (localStorage.getItem("profilePhoto")) {
     profilePhoto.src = localStorage.getItem("profilePhoto");
