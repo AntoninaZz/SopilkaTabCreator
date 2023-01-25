@@ -609,9 +609,9 @@ function sendWatermarkedTabs(canvas, text) {
   var textWidth = tempCtx.measureText(text).width;
   tempCtx.globalAlpha = .50;
   tempCtx.fillStyle = 'white'
-  tempCtx.fillText(text, cw - textWidth - 10, ch - 10);
+  tempCtx.fillText(text, cw - textWidth - 10, ch - 8);
   tempCtx.fillStyle = 'black'
-  tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 10 + 2);
+  tempCtx.fillText(text, cw - textWidth - 10 + 5, ch - 8 + 5);
   tempCanvas.toBlob(function (blob) {
     let formData = new FormData();
     let request = new XMLHttpRequest();
