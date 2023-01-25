@@ -312,6 +312,7 @@ input[type="button"]:active {
   p,
   label,
   label[for="tune"],
+  label[for="sopilkaType"],
   select,
   textarea,
   #saving {
