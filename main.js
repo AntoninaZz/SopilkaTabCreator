@@ -648,7 +648,7 @@ function addWatermark(canvas, text) {
   cw = tempCanvas.width = canvas.width;
   ch = tempCanvas.height = canvas.height;
   tempCtx.drawImage(canvas, 0, 0);
-  tempCtx.font = "bold 18px verdana";
+  tempCtx.font = "bold 16px verdana";
   var textWidth = tempCtx.measureText(text).width;
   tempCtx.globalAlpha = 0.2;
   tempCtx.fillStyle = 'black';
