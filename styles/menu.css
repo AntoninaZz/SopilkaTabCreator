@@ -144,12 +144,12 @@
 
 @media (max-width: 768px) {
     #menuToggle:checked~.sidebar {
-        width: 35vw !important;
+        width: 40vw !important;
     }
 }
 
 @media (max-width: 480px) {
     #menuToggle:checked~.sidebar {
-        width: 40vw !important;
+        width: 60vw !important;
     }
 }
