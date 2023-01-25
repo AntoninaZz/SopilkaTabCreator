@@ -549,15 +549,16 @@ function saveResults() {
   if (rbSaveToPng.checked) {
     localStorage.setItem("saveTo", rbSaveToPng.id);
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
+      let watermarkedCanvas = addWatermark(canvas, homeLink);
       let link = document.createElement("a");
       document.body.appendChild(link);
-      link.href = canvas.toDataURL();
+      link.href = watermarkedCanvas.toDataURL();
       link.download = `${filename === '' ? 'tabs' : filename}.png`;
       link.click();
       document.body.removeChild(link);
-      if (duplToTg && canvas) {
+      if (duplToTg) {
         if (localStorage.getItem("chat_id")) {
-          sendWatermarkedTabs(canvas, homeLink);
+          sendTabs(watermarkedCanvas);
         } else {
           showErr();
         }
@@ -567,7 +568,7 @@ function saveResults() {
     localStorage.setItem("saveTo", rbSaveToTg.id);
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
       if (localStorage.getItem("chat_id")) {
-        sendWatermarkedTabs(canvas, homeLink);
+        sendTabs(addWatermark(canvas, homeLink));
       } else {
         showErr();
       }
@@ -598,21 +599,8 @@ function sendMessage() {
   }
 }
 
-function sendWatermarkedTabs(canvas, text) {
-  var tempCanvas = document.createElement('canvas');
-  var tempCtx = tempCanvas.getContext('2d');
-  var cw, ch;
-  cw = tempCanvas.width = canvas.width;
-  ch = tempCanvas.height = canvas.height;
-  tempCtx.drawImage(canvas, 0, 0);
-  tempCtx.font = "24px verdana";
-  var textWidth = tempCtx.measureText(text).width;
-  tempCtx.globalAlpha = .50;
-  tempCtx.fillStyle = 'white'
-  tempCtx.fillText(text, cw - textWidth - 10, ch - 9);
-  tempCtx.fillStyle = 'black'
-  tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 9 + 2);
-  tempCanvas.toBlob(function (blob) {
+function sendTabs(canvas) {
+  canvas.toBlob(function (blob) {
     let formData = new FormData();
     let request = new XMLHttpRequest();
     request.addEventListener('error', sendMessage);
@@ -651,6 +639,23 @@ function getFilename() {
     filename += transliteration[char] === undefined ? char : transliteration[char];
   }
   return filename;
+}
+
+function addWatermark(canvas, text) {
+  var tempCanvas = document.createElement('canvas');
+  var tempCtx = tempCanvas.getContext('2d');
+  var cw, ch;
+  cw = tempCanvas.width = canvas.width;
+  ch = tempCanvas.height = canvas.height;
+  tempCtx.drawImage(canvas, 0, 0);
+  tempCtx.font = "24px verdana";
+  var textWidth = tempCtx.measureText(text).width;
+  tempCtx.globalAlpha = .50;
+  tempCtx.fillStyle = 'white'
+  tempCtx.fillText(text, cw - textWidth - 10, ch - 9);
+  tempCtx.fillStyle = 'black'
+  tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 9 + 2);
+  return(tempCanvas);
 }
 
 function unsubscribe() {
