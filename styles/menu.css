@@ -135,3 +135,9 @@
     display: block;
     padding: 9px 24px;
 }
+
+@media (max-width: 1024px) {
+    #menuToggle:checked~.sidebar {
+        width: 30vw !important;
+    }
+}
