@@ -51,13 +51,14 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 let duplToTg = false;
 let tglogin;
+let homeLink = window.location.href;
 let logoutContent = {
   uk: `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`,
   en: `<p>You logged in as <em>${localStorage.getItem("name")}</em></p><p>Now you can save your tabs to <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Log out" onclick="unsubscribe()">`
 };
 
 // entry point
-getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //window.location.href + 'data.json'
+getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //homeLink + 'data.json'
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -556,22 +557,7 @@ function saveResults() {
       document.body.removeChild(link);
       if (duplToTg && canvas) {
         if (localStorage.getItem("chat_id")) {
-          canvas.toBlob(function (blob) {
-            let formData = new FormData();
-            let request = new XMLHttpRequest();
-            request.addEventListener('error', sendMessage);
-            if (tabs.offsetHeight <= 24 * tabs.offsetWidth / 9) {
-              formData.append('photo', blob);
-              formData.append('caption', notes.value);
-              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
-            } else {
-              let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
-              formData.append('document', file);
-              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
-              sendMessage();
-            }
-            request.send(formData);
-          });
+          sendWatermarkedTabs(canvas, homeLink);
         } else {
           showErr();
         }
@@ -581,24 +567,7 @@ function saveResults() {
     localStorage.setItem("saveTo", rbSaveToTg.id);
     html2canvas(tabs, { allowTaint: true }).then(function (canvas) {
       if (localStorage.getItem("chat_id")) {
-        if (canvas) {
-          canvas.toBlob(function (blob) {
-            let formData = new FormData();
-            let request = new XMLHttpRequest();
-            request.addEventListener('error', sendMessage);
-            if (tabs.offsetHeight <= 24 * tabs.offsetWidth / 9) {
-              formData.append('photo', blob);
-              formData.append('caption', notes.value);
-              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
-            } else {
-              let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
-              formData.append('document', file);
-              request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
-              sendMessage();
-            }
-            request.send(formData);
-          });
-        }
+        sendWatermarkedTabs(canvas, homeLink);
       } else {
         showErr();
       }
@@ -627,6 +596,38 @@ function sendMessage() {
   } else {
     showErr();
   }
+}
+
+function sendWatermarkedTabs(canvas, text) {
+  var tempCanvas = document.createElement('canvas');
+  var tempCtx = tempCanvas.getContext('2d');
+  var cw, ch;
+  cw = tempCanvas.width = canvas.width;
+  ch = tempCanvas.height = canvas.height;
+  tempCtx.drawImage(canvas, 0, 0);
+  tempCtx.font = "24px verdana";
+  var textWidth = tempCtx.measureText(text).width;
+  tempCtx.globalAlpha = .50;
+  tempCtx.fillStyle = 'white'
+  tempCtx.fillText(text, cw - textWidth - 10, ch - 20);
+  tempCtx.fillStyle = 'black'
+  tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 20 + 2);
+  tempCanvas.toBlob(function (blob) {
+    let formData = new FormData();
+    let request = new XMLHttpRequest();
+    request.addEventListener('error', sendMessage);
+    if (tabs.offsetHeight <= 24 * tabs.offsetWidth / 9) {
+      formData.append('photo', blob);
+      formData.append('caption', notes.value);
+      request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+    } else {
+      let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
+      formData.append('document', file);
+      request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+      sendMessage();
+    }
+    request.send(formData);
+  });
 }
 
 function getFilename() {
