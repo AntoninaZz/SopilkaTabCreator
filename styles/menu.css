@@ -153,3 +153,25 @@
         width: 70vw !important;
     }
 }
+
+@media (max-height: 480px) and (orientation: landscape) {
+    #menuToggle:checked~.sidebar {
+        width: 70vw !important;
+    }
+
+    .menu {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menuItem {
+        width: 35%;
+        margin: 10px;
+    }
+
+    .sidebar {
+        padding: 60px 0;
+    }
+}
