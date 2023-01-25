@@ -315,7 +315,8 @@ input[type="button"]:active {
   label[for="sopilkaType"],
   select,
   textarea,
-  #saving {
+  #saving,
+  #requaireLogin {
     display: none;
   }
 }
