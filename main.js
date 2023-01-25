@@ -611,7 +611,7 @@ function sendWatermarkedTabs(canvas, text) {
   tempCtx.fillStyle = 'white'
   tempCtx.fillText(text, cw - textWidth - 10, ch - 8);
   tempCtx.fillStyle = 'black'
-  tempCtx.fillText(text, cw - textWidth - 10 + 5, ch - 8 + 5);
+  tempCtx.fillText(text, cw - textWidth - 10 + 2, ch - 8 + 2);
   tempCanvas.toBlob(function (blob) {
     let formData = new FormData();
     let request = new XMLHttpRequest();
