@@ -142,7 +142,8 @@ input[type="checkbox"] {
 .info {
     font-size: 14px;
     text-align: left;
-    align-items: left;
+    /* align-items: left; */
+    width: 40%;
 }
 
 .popup header {
@@ -269,12 +270,12 @@ input:checked+.slider:before {
 }
 
 .carousel {
-    width: 180vw;
+    width: 240vw;
     transition: all 2s;
 }
 
 .slide {
-    width: 30vw;
+    width: 40vw;
     padding: 30px;
     float: left;
     box-sizing: border-box;
@@ -285,23 +286,23 @@ input:checked+.slider:before {
 }
 
 #slider2:checked~.carouselContent .carousel {
-    margin-left: -30vw;
+    margin-left: -40vw;
 }
 
 #slider3:checked~.carouselContent .carousel {
-    margin-left: -60vw;
+    margin-left: -80vw;
 }
 
 #slider4:checked~.carouselContent .carousel {
-    margin-left: -90vw;
-}
-
-#slider5:checked~.carouselContent .carousel {
     margin-left: -120vw;
 }
 
+#slider5:checked~.carouselContent .carousel {
+    margin-left: -160vw;
+}
+
 #slider6:checked~.carouselContent .carousel {
-    margin-left: -150vw;
+    margin-left: -200vw;
 }
 
 #slider1:checked~label[for="slider2"].right::after,
@@ -457,6 +458,10 @@ input[type="radio"] {
         margin-left: -400vw;
     }
 
+    .carouselNavigation {
+        bottom: 10px;
+    }
+
     .info,
     .interview {
         font-size: 14px;
@@ -507,6 +512,10 @@ input[type="radio"] {
 
     #slider6:checked~.carouselContent .carousel {
         margin-left: -375vw;
+    }
+
+    .carouselNavigation {
+        bottom: 7px;
     }
 
     .interview .icon {
