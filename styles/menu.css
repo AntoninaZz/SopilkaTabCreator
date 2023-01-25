@@ -159,6 +159,14 @@
         width: 70vw !important;
     }
 
+    #tglogout p {
+        margin: 5px;
+    }
+
+    #btnUnsubscribe {
+        margin-top: 10px;
+    }
+
     .menu {
         display: flex;
         flex-flow: row wrap;
