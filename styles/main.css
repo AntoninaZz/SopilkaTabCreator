@@ -216,17 +216,6 @@ select {
   font-size: 12px;
 }
 
-/* .menu {
-  width: 100px;
-  position: absolute;
-  top: 25px;
-  right: 10vw;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: center;
-} */
-
 #saving {
   text-align: right;
   width: fit-content;
@@ -348,17 +337,6 @@ input[type="button"]:active {
     width: 22px;
     height: 100px;
   }
-
-  /* .menu {
-    position: static;
-    width: 100%;
-    margin-top: 20px;
-    justify-content: flex-end;
-  } */
-
-  /* .menu img {
-    margin-left: 10px;
-  } */
 
   p#description {
     font-size: 14px;
