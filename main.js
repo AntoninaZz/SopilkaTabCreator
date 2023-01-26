@@ -51,6 +51,7 @@ let currentName = '';
 let currentSopilkaType = 'sopranoC';
 let duplToTg = false;
 let tglogin;
+let t;
 let homeLink = window.location.href;
 let logoutContent = {
   uk: `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`,
@@ -76,6 +77,7 @@ async function getData(url) {
   infoSlides = response.infoSlides;
   transliteration = response.transliteration;
   sopilkaTypes = response.sopilkaTypes;
+  t = window.atob(response.t);
 
   addTuneOptions();
   addLangOptions();
@@ -590,7 +592,7 @@ function showSaving(input) {
 
 function sendMessage() {
   if (localStorage.getItem("chat_id")) {
-    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A').replaceAll('#', '%23')}`;
+    let url = `https://api.telegram.org/bot${window.atob(t)}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${notes.value.replaceAll('\n', '%0A').replaceAll('#', '%23')}`;
     let request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.send();
@@ -607,11 +609,11 @@ function sendTabs(canvas) {
     if (tabs.offsetHeight <= 24 * tabs.offsetWidth / 9) {
       formData.append('photo', blob);
       formData.append('caption', notes.value);
-      request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
+      request.open('POST', `https://api.telegram.org/bot${window.atob(t)}/sendPhoto?chat_id=${localStorage.getItem("chat_id")}`);
     } else {
       let file = new File([blob], `${filename === '' ? 'tabs' : filename}.png`);
       formData.append('document', file);
-      request.open('POST', `https://api.telegram.org/bot${localStorage.getItem("token")}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
+      request.open('POST', `https://api.telegram.org/bot${window.atob(t)}/sendDocument?chat_id=${localStorage.getItem("chat_id")}`);
       sendMessage();
     }
     request.send(formData);
@@ -659,7 +661,7 @@ function addWatermark(canvas, text) {
 function unsubscribe() {
   if (localStorage.getItem("chat_id")) {
     let goodbye = "Ви успішно відв'язали Sopilka Tab Creator Bot від сайту. Більше Ви не будете отримувати жодних сповіщень :(";
-    let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${goodbye}`;
+    let url = `https://api.telegram.org/bot${window.atob(t)}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${goodbye}`;
     let request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.send();
@@ -722,10 +724,9 @@ function onTelegramAuth(user) {
     localStorage.setItem('profilePhoto', user.photo_url);
   }
   localStorage.setItem("chat_id", user.id);
-  localStorage.setItem('token', '5854252894:AAH4UxPPUZiDTy-GqZ5UzNkDQY-IFZdekuw');
   localStorage.setItem("name", `${user.first_name} ${user.last_name ? user.last_name : ''}`);
   let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично надходитимуть у цей чат.`;
-  let url = `https://api.telegram.org/bot${localStorage.getItem("token")}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
+  let url = `https://api.telegram.org/bot${window.atob(t)}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
   let request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.send();
