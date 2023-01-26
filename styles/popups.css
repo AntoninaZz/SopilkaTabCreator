@@ -312,7 +312,7 @@ input:checked+.slider:before {
 #slider3:checked~label[for="slider4"].right::after,
 #slider4:checked~label[for="slider5"].right::after,
 #slider5:checked~label[for="slider6"].right::after,
-#slider6:checked~label[for="slider6"].right::after {
+#slider6:checked~label[for="slider7"].right::after {
     content: '﹥';
     position: fixed;
     top: 45%;
@@ -321,7 +321,7 @@ input:checked+.slider:before {
     cursor: pointer;
 }
 
-#slider7:checked~label[for="slider5"].left::before,
+#slider7:checked~label[for="slider6"].left::before,
 #slider6:checked~label[for="slider5"].left::before,
 #slider5:checked~label[for="slider4"].left::before,
 #slider4:checked~label[for="slider3"].left::before,
@@ -364,7 +364,7 @@ input[type="radio"] {
 #slider4:checked~.carouselContent .carouselNavigation label[for="slider4"].navigationButton,
 #slider5:checked~.carouselContent .carouselNavigation label[for="slider5"].navigationButton,
 #slider6:checked~.carouselContent .carouselNavigation label[for="slider6"].navigationButton,
-#slider7:checked~.carouselContent .carouselNavigation label[for="slider6"].navigationButton {
+#slider7:checked~.carouselContent .carouselNavigation label[for="slider7"].navigationButton {
     background-color: #08f;
 }
 
