@@ -59,7 +59,7 @@ let logoutContent = {
 };
 
 // entry point
-getData('https://antoninazz.github.io/SopilkaTabCreator/' + 'data.json'); //homeLink + 'data.json'
+getData(homeLink + 'data.json');
 window.onload = function () { setTimeout(showInterview, 4000) };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
@@ -318,7 +318,7 @@ function elementCreation(note) {
       figcaption.innerText = notesTranslation[note][currentLang];
     }
     img.alt = `${note}`;
-    img.addEventListener("error", function(event) {
+    img.addEventListener("error", function (event) {
       event.target.src = "./img/error.svg";
       event.onerror = null;
     });
@@ -659,7 +659,7 @@ function addWatermark(canvas, text) {
   tempCtx.globalAlpha = 0.2;
   tempCtx.fillStyle = 'black';
   tempCtx.fillText(text, cw - textWidth - 20, ch - 10);
-  return(tempCanvas);
+  return (tempCanvas);
 }
 
 function unsubscribe() {
