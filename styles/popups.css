@@ -32,50 +32,6 @@
     transition: all 0.3s;
 }
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-#develop {
-    background: rgba(255, 255, 255, 0.9);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: firebrick;
-    flex-direction: column;
-}
-#develop h2 {
-    margin: 20px 20%;
-    font-size: 14px;
-    text-align: center;
-}
-#develop a {
-    display: block;
-    padding: 5px 20px;
-    width: 200px;
-    text-align: center;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(136deg, rgb(255, 209, 209) 0%, firebrick 100%);
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-}
-
-#develop a:hover,
-#develop a:active,
-#develop a:visited {
-    background: linear-gradient(136deg, rgba(253, 177, 177) 0%, firebrick 100%);
-    color: white;
-    text-decoration: none;
-}
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-
 #info:checked~.overlay,
 #settings:checked~.overlay,
 .interview.show~.overlay {
