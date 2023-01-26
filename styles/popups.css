@@ -10,6 +10,7 @@
     padding: 30px;
     text-align: center;
     width: 30%;
+    max-height: 90%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -77,7 +78,6 @@
 
 #info:checked~.overlay,
 #settings:checked~.overlay,
-/* #profile:checked~.overlay, */
 .interview.show~.overlay {
     display: block;
     opacity: 1;
@@ -93,7 +93,6 @@ input[type="checkbox"] {
 
 #info:checked~.info,
 #settings:checked~.settings,
-/* #profile:checked~.profile, */
 .interview.show {
     opacity: 1;
     pointer-events: auto;
@@ -142,7 +141,6 @@ input[type="checkbox"] {
 .info {
     font-size: 14px;
     text-align: left;
-    /* align-items: left; */
     width: 40%;
 }
 
@@ -270,7 +268,7 @@ input:checked+.slider:before {
 }
 
 .carousel {
-    width: 240vw;
+    width: 280vw;
     transition: all 2s;
 }
 
@@ -305,11 +303,16 @@ input:checked+.slider:before {
     margin-left: -200vw;
 }
 
+#slider7:checked~.carouselContent .carousel {
+    margin-left: -240vw;
+}
+
 #slider1:checked~label[for="slider2"].right::after,
 #slider2:checked~label[for="slider3"].right::after,
 #slider3:checked~label[for="slider4"].right::after,
 #slider4:checked~label[for="slider5"].right::after,
-#slider5:checked~label[for="slider6"].right::after {
+#slider5:checked~label[for="slider6"].right::after,
+#slider6:checked~label[for="slider6"].right::after {
     content: '﹥';
     position: fixed;
     top: 45%;
@@ -318,6 +321,7 @@ input:checked+.slider:before {
     cursor: pointer;
 }
 
+#slider7:checked~label[for="slider5"].left::before,
 #slider6:checked~label[for="slider5"].left::before,
 #slider5:checked~label[for="slider4"].left::before,
 #slider4:checked~label[for="slider3"].left::before,
@@ -359,7 +363,8 @@ input[type="radio"] {
 #slider3:checked~.carouselContent .carouselNavigation label[for="slider3"].navigationButton,
 #slider4:checked~.carouselContent .carouselNavigation label[for="slider4"].navigationButton,
 #slider5:checked~.carouselContent .carouselNavigation label[for="slider5"].navigationButton,
-#slider6:checked~.carouselContent .carouselNavigation label[for="slider6"].navigationButton {
+#slider6:checked~.carouselContent .carouselNavigation label[for="slider6"].navigationButton,
+#slider7:checked~.carouselContent .carouselNavigation label[for="slider6"].navigationButton {
     background-color: #08f;
 }
 
@@ -370,7 +375,7 @@ input[type="radio"] {
     }
 
     .carousel {
-        width: 360vw;
+        width: 420vw;
     }
 
     .slide {
@@ -396,6 +401,10 @@ input[type="radio"] {
 
     #slider6:checked~.carouselContent .carousel {
         margin-left: -300vw;
+    }
+
+    #slider7:checked~.carouselContent .carousel {
+        margin-left: -360vw;
     }
 
     .popup header {
@@ -430,7 +439,7 @@ input[type="radio"] {
     }
 
     .carousel {
-        width: 480vw;
+        width: 560vw;
     }
 
     .slide {
@@ -456,6 +465,10 @@ input[type="radio"] {
 
     #slider6:checked~.carouselContent .carousel {
         margin-left: -400vw;
+    }
+
+    #slider7:checked~.carouselContent .carousel {
+        margin-left: -480vw;
     }
 
     .carouselNavigation {
@@ -486,7 +499,7 @@ input[type="radio"] {
     }
 
     .carousel {
-        width: 450vw;
+        width: 525vw;
     }
 
     .slide {
@@ -512,6 +525,10 @@ input[type="radio"] {
 
     #slider6:checked~.carouselContent .carousel {
         margin-left: -375vw;
+    }
+
+    #slider7:checked~.carouselContent .carousel {
+        margin-left: -450vw;
     }
 
     .carouselNavigation {
