@@ -318,6 +318,10 @@ function elementCreation(note) {
       figcaption.innerText = notesTranslation[note][currentLang];
     }
     img.alt = `${note}`;
+    img.addEventListener("error", function(event) {
+      event.target.src = "./img/error.svg";
+      event.onerror = null;
+    });
     tabs.appendChild(figure);
     figure.appendChild(img);
     figure.appendChild(figcaption);
