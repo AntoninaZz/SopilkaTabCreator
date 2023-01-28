@@ -447,11 +447,19 @@ input[type="radio"] {
 }
 
 @media (max-height: 480px) and (orientation: landscape) {
+    h4#slogan {
+        text-align: left;
+    }
+
     .popup {
         max-height: 75%;
         width: 75%;
         padding: 15px;
         font-size: 13px;
+    }
+
+    .setting {
+        margin: 10px 0;
     }
 
     .carousel {
