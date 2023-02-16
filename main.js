@@ -54,7 +54,7 @@ let tglogin;
 let t;
 let homeLink = window.location.href;
 let logoutContent = {
-  uk: `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`,
+  uk: `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Вийти" onclick="unsubscribe()">`,
   en: `<p>You logged in as <em>${localStorage.getItem("name")}</em></p><p>Now you can save your tabs to <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Log out" onclick="unsubscribe()">`
 };
 
@@ -735,6 +735,6 @@ function onTelegramAuth(user) {
   request.open("GET", url, true);
   request.send();
   tglogin.setAttribute('class', 'invisible');
-  tglogout.innerHTML = localStorage.getItem('lang') === 'en' ? `<p>You logged in as <em>${localStorage.getItem("name")}</em></p><p>Now you can save your tabs to <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Log out" onclick="unsubscribe()">` : `<p>Ви увійшли як <em>${localStorage.getItem("name")}</em></p><p>Тепер Ви можете зберігати аплікатурні схеми до окремого чату у <em>telegram</em>.</p><input type="button" id="btnUnsubscribe" value="Не надсилати мені повідомлення" onclick="unsubscribe()">`;
+  tglogout.innerHTML = logoutContent[currentLang];
   tglogout.setAttribute('class', '');
 }
