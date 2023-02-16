@@ -664,7 +664,7 @@ function addWatermark(canvas, text) {
 
 function unsubscribe() {
   if (localStorage.getItem("chat_id")) {
-    let goodbye = "Ви успішно відв'язали Sopilka Tab Creator Bot від сайту. Більше Ви не будете отримувати жодних сповіщень :(";
+    let goodbye = `Ви успішно відв'язали Sopilka Tab Creator Bot від пристрою ${platform.description.split(' on ')[1]}. Більше Ви не будете отримувати жодних сповіщень :(`;
     let url = `https://api.telegram.org/bot${window.atob(t)}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${goodbye}`;
     let request = new XMLHttpRequest();
     request.open("GET", url, true);
@@ -729,7 +729,7 @@ function onTelegramAuth(user) {
   }
   localStorage.setItem("chat_id", user.id);
   localStorage.setItem("name", `${user.first_name} ${user.last_name ? user.last_name : ''}`);
-  let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично надходитимуть у цей чат.`;
+  let welcomeMessage = `Вітаю, ${user.first_name} ${user.last_name ? user.last_name : ''}!%0AВи успішно підключили пристрій ${platform.description.split(' on ')[1]} до Sopilka Tab Creator Bot. Тепер при збереженні результатів роботи на сайті Ваші аплікатурні схеми автоматично надходитимуть у цей чат.`;
   let url = `https://api.telegram.org/bot${window.atob(t)}/sendMessage?chat_id=${localStorage.getItem("chat_id")}&text=${welcomeMessage}`;
   let request = new XMLHttpRequest();
   request.open("GET", url, true);
