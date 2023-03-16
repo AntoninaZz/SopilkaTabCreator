@@ -60,7 +60,7 @@ let logoutContent = {
 
 // entry point
 getData(homeLink + 'data.json');
-window.onload = function () { setTimeout(showInterview, 4000) };
+window.onload = function () { setTimeout(showInterview, 4000); };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
   normalizeInput(event.target.value);
@@ -198,7 +198,7 @@ function showTabs(notes) {
         } else {
           elementCreation('line');
         }
-        break
+        break;
       case '-':
         if (i === 0) {
           if (notes[i + 1] === '-' && notes[i + 2] === '-' && notes[i + 3] === '\n') {
@@ -223,10 +223,10 @@ function showTabs(notes) {
             elementCreation(`comment_${comment}`);
           }
         }
-        break
+        break;
       case ' ':
         elementCreation('space');
-        break
+        break;
       case 'C':
       case 'c':
       case 'D':
@@ -256,10 +256,10 @@ function showTabs(notes) {
         } else {
           elementCreation(notes[i]);
         }
-        break
+        break;
       default:
         elementCreation('error');
-        break
+        break;
     }
   }
   spaceCorrection();
