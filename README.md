@@ -8,11 +8,11 @@ You can select one of the prewritten tunes from a drop-down list, or you can cre
 Write notes in the input field and immediately get ready to play tabs. 
 Notes can be written both in English (c d e...) and Ukrainian (до ре мі...), as well as using numbers (1 2 3...).
 Use # after a note to indicate sharp, and +, ++, or uppercase letters to indicate upper octaves. 
-Spaces and newlines can be used for grouping. Add headings, subheadings and comments as you like. 
+Spaces and newlines can be used for grouping. Add headings, subheadings, and comments as you like. 
 You can also choose the key of the sopilka while creating tabs for your own tune: soprano C or alto F. 
 ## Save Results
-You can save results by printing the page, save your tabs as a pdf file, or download the results as a png image. 
-You can also save your tabs to Telegram, but you need to be logged via Telegram in in order to do so.
+You can save results by printing the page, saving your tabs as a pdf file, or downloading the results as a png image. 
+You can also save your tabs to Telegram, but you need to be logged in via Telegram in order to do so.
 ## Settings
 In the settings popup, you can personalize the application according to your needs: 
 * choose the language of the page (Ukrainian or English), 
