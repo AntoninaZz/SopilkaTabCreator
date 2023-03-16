@@ -139,7 +139,7 @@
         },
         "description": {
             "uk": "Для <em>десятиотворної хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для групування нот використовуйте пробіли й переходи на новий рядок, а заголовки, підзаголовки й коментарі можна додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!",
-            "en": "For <em>ten-hole chromatic sopilka</em>. Use <kbd>#</kbd> after a note to indicate sharp, and <kbd>+</kbd> and <kbd>++</kbd> to indicate upper octaves. Spaces and newlines can be used for grouping, and headings, subheadings and comments can be added by starting a new line with <kbd>---</kbd>, <kbd>--</kbd> and <kbd>-</kbd>. Good luck!"
+            "en": "For <em>ten-hole chromatic sopilka</em>. Use <kbd>#</kbd> after a note to indicate sharp, and <kbd>+</kbd> and <kbd>++</kbd> to indicate upper octaves. Spaces and newlines can be used for grouping, and headings, subheadings, and comments can be added by starting a new line with <kbd>---</kbd>, <kbd>--</kbd>, and <kbd>-</kbd>. Good luck!"
         },
         "tune": {
             "uk": "Мелодія",
@@ -199,7 +199,7 @@
         },
         "requaireLogin": {
             "uk": "Щоб використовувати цю функцію виконайте спершу наступні налаштування:<ol><li>Натисніть <kbd>≡</kbd> в верхньому правому кутку сторінки → <kbd>Увійти через Telegram</kbd>.</li><li>У вікні, що з'явилося, введіть свій зареєстрований у Telegram номер телефону.</li><li>Натисніть <kbd>Далі</kbd>, а також <kbd>Прийняти</kbd> у повідомленні, що надійде від служби Telegram.</li></ol>Це дозволить Вам зберігати таби у повідомленнях Telegram.<label id='closeErr' onclick='closeErr()'>✖</label>",
-            "en": "In order to be able to save tabs to telegram you need to be logged in:<ol><li>Go to <kbd>≡</kbd> and click <kbd>Log in via Telegram</kbd>.</li><li>Enter your Telegram phone number in the popup window.</li><li>Click <kbd>Ok</kbd> and don't forget to press <kbd>Accept</kbd> in the message from Telegram service.</li></ol><label id='closeErr' onclick='closeErr()'>✖</label>"
+            "en": "In order to be able to save tabs to Telegram, you need to be logged in:<ol><li>Go to <kbd>≡</kbd> and click <kbd>Log in via Telegram</kbd>.</li><li>Enter your Telegram phone number in the popup window.</li><li>Click <kbd>OK</kbd>, and don't forget to press <kbd>Accept</kbd> in the message from the Telegram service.</li></ol><label id='closeErr' onclick='closeErr()'>✖</label>"
         }
     },
     "infoSlides": {
