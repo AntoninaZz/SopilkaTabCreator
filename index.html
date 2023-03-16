@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="./styles/menu.css">
     <link rel="icon" type="image/x-icon" href="./img/icon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js" integrity="sha512-eYPrm8TgYWg3aa6tvSRZjN4v0Z9Qx69q3RhfSj+Mf89QqwOMqmwSlsVqfp4N8NVAcZe/YeUhh9x/nM2CAOp6cA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" type="text/javascript"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
     </div>
     <div class="interview popup">
         <img src="./img/cancel-icon.svg" alt="cancel" class="cancel-icon" onclick="closeInterview()">
-        <div class="icon"><img src="./img/quiz.svg" class="quiz-icon"></div>
+        <div class="icon"><img src="./img/quiz.svg" class="quiz-icon" alt="poll"></div>
         <header>Допоможи розробнику – залиш відгук!</header>
         <p>Дякую, що користуєтесь цією розробкою! Будь ласка, приділіть кілька хвилин часу та допоможіть автору провести
             дослідження для дипломної роботи. Опитування не займе більше 5 хвилин, але є дуже важливим для мене!</p>
@@ -49,7 +49,7 @@
     </div>
     <div class="overlay" onclick="closeInterview()"></div>
     <div class="hamburger">
-        <input id="menuToggle" type="checkbox" />
+        <input id="menuToggle" type="checkbox">
         <label class="menuBtn" for="menuToggle"><span></span></label>
         <div class="sidebar">
             <img src="./img/avatar.svg" alt="Profile Picture" id="profilePhoto">
@@ -123,7 +123,7 @@
                 <select name="sopilkaType" id="sopilkaType" onchange="changeSopilkaType(this.value)"></select>
             </div>
         </div>
-        <textarea id="notes" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        <textarea id="notes" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
         <div id="tabs"></div>
         <div id="saving">
             <input type="button" id="btnSave" value="Зберегти" onclick="saveResults()">
