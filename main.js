@@ -36,10 +36,10 @@ let labelLang = document.querySelectorAll("[for='lang']")[0];
 let labelSopilkaType = document.querySelectorAll("[for='sopilkaType']")[0];
 let labelSpacing = document.querySelectorAll("[for='spacing']")[0];
 let labelWhiteBg = document.querySelectorAll("[for='whiteBg']")[0];
-let labelShowNotesSwitch = document.querySelectorAll('[for="showNotes"]')[0];
-let labelduplicateToTg = document.querySelectorAll('[for="duplicateToTg"]')[0];
-let labelSettings = document.querySelectorAll('label.menuItem[for="settings"]')[0];
-let labelInfo = document.querySelectorAll('label.menuItem[for="info"]')[0];
+let labelShowNotesSwitch = document.querySelectorAll("[for='showNotes']")[0];
+let labelduplicateToTg = document.querySelectorAll("[for='duplicateToTg']")[0];
+let labelSettings = document.querySelectorAll("label.menuItem[for='settings']")[0];
+let labelInfo = document.querySelectorAll("label.menuItem[for='info']")[0];
 let infoPopup = document.getElementsByClassName("info")[0];
 let interviewPopup = document.getElementsByClassName("interview")[0];
 let optionScaleB;
@@ -171,7 +171,7 @@ function getSettingsFromLocalStorage() {
 
 function showTabs(notes) {
   tabs.innerHTML = '';
-  for (var i = 0; i < notes.length; i++) {
+  for (let i = 0; i < notes.length; i++) {
     switch (notes[i]) {
       case '\n':
         if (notes[i + 1] === '-' && notes[i + 2] === '-' && notes[i + 3] === '-' && notes[i + 4] === '\n') {
