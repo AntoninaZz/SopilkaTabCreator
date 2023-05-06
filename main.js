@@ -41,7 +41,7 @@ let labelduplicateToTg = document.querySelectorAll("[for='duplicateToTg']")[0];
 let labelSettings = document.querySelectorAll("label.menuItem[for='settings']")[0];
 let labelInfo = document.querySelectorAll("label.menuItem[for='info']")[0];
 let infoPopup = document.getElementsByClassName("info")[0];
-let interviewPopup = document.getElementsByClassName("interview")[0];
+// let interviewPopup = document.getElementsByClassName("interview")[0];
 let optionScaleB;
 let optionScaleE;
 let optionOwnTune;
@@ -60,7 +60,7 @@ let logoutContent = {
 
 // entry point
 getData(homeLink + 'data.json');
-window.onload = function () { setTimeout(showInterview, 4000); };
+// window.onload = function () { setTimeout(showInterview, 4000); };
 notes.addEventListener("input", function (event) {
   showSaving(event.target.value);
   normalizeInput(event.target.value);
@@ -694,13 +694,13 @@ function closePopup() {
   }
 }
 
-function showInterview() {
-  interviewPopup.setAttribute("class", "interview popup show");
-}
+// function showInterview() {
+//   interviewPopup.setAttribute("class", "interview popup show");
+// }
 
-function closeInterview() {
-  interviewPopup.setAttribute("class", "interview popup");
-}
+// function closeInterview() {
+//   interviewPopup.setAttribute("class", "interview popup");
+// }
 
 function waitForTg() {
   return new Promise(resolve => {
