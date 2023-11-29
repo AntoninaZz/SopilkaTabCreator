@@ -138,7 +138,7 @@
             "en": "Play sopilka easily without musical notation knowledge!"
         },
         "description": {
-            "uk": "Для <em>десятиотворної хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для позначення дієз та великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для групування нот використовуйте пробіли й переходи на новий рядок, а заголовки, підзаголовки й коментарі можна додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!",
+            "uk": "Для <em>десятиотворної хроматичної сопілки</em>. Використовуйте <kbd>#</kbd> після ноти для позначення дієз, а великі літери, <kbd>+</kbd> і <kbd>++</kbd> для позначення нот вищих октав. Для групування нот використовуйте пробіли й переходи на новий рядок, а заголовки, підзаголовки й коментарі можна додавати, почавши новий рядок з <kbd>---</kbd>, <kbd>--</kbd> або <kbd>-</kbd> відповідно. Успіхів!",
             "en": "For <em>ten-hole chromatic sopilka</em>. Use <kbd>#</kbd> after a note to indicate sharp, and <kbd>+</kbd> and <kbd>++</kbd> to indicate upper octaves. Spaces and newlines can be used for grouping, and headings, subheadings, and comments can be added by starting a new line with <kbd>---</kbd>, <kbd>--</kbd>, and <kbd>-</kbd>. Good luck!"
         },
         "tune": {
