@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
+@font-face {
+  font-family: namu;
+  src: url('../fonts/NAMU-1400.ttf');
+}
 
 html {
   padding: 0;
@@ -180,9 +184,13 @@ h4#slogan.lang-en {
   color: #000;
 }
 
+.font-namu {
+  font-family: namu, Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
 select {
   padding: 5px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /*font-family: Verdana, Geneva, Tahoma, sans-serif;*/
   color: firebrick;
   border: 1px solid firebrick;
   border-radius: 3px;
