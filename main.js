@@ -48,6 +48,7 @@ let infoPopup = document.getElementsByClassName("info")[0];
 let optionScaleB;
 let optionScaleE;
 let optionOwnTune;
+let optionDefaultFont;
 let currentLang = 'uk';
 let currentFont = 'default';
 let currentSpacing = 4;
@@ -93,6 +94,8 @@ async function getData(url) {
   optionScaleB = document.querySelectorAll('[value="scaleB"]')[0];
   optionScaleE = document.querySelectorAll('[value="scaleE"]')[0];
   optionOwnTune = document.querySelectorAll('[value="byHand"]')[0];
+  optionDefaultFont = document.querySelectorAll('[value="default"]')[0];
+
 
   getSettingsFromLocalStorage();
 }
@@ -427,6 +430,7 @@ function changeLang(newLang) {
   optionScaleB.innerText = tunes[optionScaleB.getAttribute('value')].name[currentLang];
   optionScaleE.innerText = tunes[optionScaleE.getAttribute('value')].name[currentLang];
   optionOwnTune.innerText = contentTranslation[optionOwnTune.getAttribute('value')][currentLang];
+  optionDefaultFont.innerText = fonts[optionDefaultFont.getAttribute('value')][currentLang];
   labelSopilkaType.innerText = contentTranslation[labelSopilkaType.getAttribute('for')][currentLang];
   tglogout.innerHTML = logoutContent[currentLang];
   labelSettings.innerHTML = contentTranslation[labelSettings.getAttribute('for')][currentLang];
