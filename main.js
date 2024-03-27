@@ -255,11 +255,11 @@ function showTabs(notes) {
       case 'a':
       case 'B':
       case 'b':
-        if (notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' && notes[i + 2] == '+' && notes[i + 3] == '+') {
+        if ((notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' && notes[i + 2] == '+' && notes[i + 3] == '+') || (notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭' && notes[i + 2] == '+' && notes[i + 3] == '+')) {
           elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}${notes[++i]}`);
-        } else if ((notes[i + 1] == '+' || notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#') && notes[i + 2] == '+') {
+        } else if (((notes[i + 1] == '+' || notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#') && notes[i + 2] == '+') || (notes[i + 1] == '+' || notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭' && notes[i + 2] == '+')) {
           elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}`);
-        } else if (notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' || notes[i + 1] == '+') {
+        } else if ((notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' || notes[i + 1] == '+') || (notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭' || notes[i + 1] == '+')) {
           if (notes[i] == notes[i].toUpperCase()) {
             elementCreation(`${notes[i].toLowerCase()}${notes[++i]}+`);
           } else {
@@ -305,6 +305,9 @@ function elementCreation(note) {
     if (note.endsWith("#")) {
       img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}.svg`;
       figcaption.innerText = `${notesTranslation[note[0]][currentLang]}#`;
+    } else if (note.endsWith("♭")) {
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) - 1 + sopilkaTypes[currentSopilkaType].offset) % 12]}.svg`;
+      figcaption.innerText = `${notesTranslation[note[0]][currentLang]}♭`;
     } else if (note.endsWith("#+")) {
       if (note == note.toUpperCase()) {
         img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0].toLowerCase() + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}++.svg`;
@@ -313,8 +316,19 @@ function elementCreation(note) {
         img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}+.svg`;
         figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}`;
       }
+    } else if (note.endsWith("♭+")) {
+      if (note == note.toUpperCase()) {
+        img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0].toLowerCase()) - 1 + sopilkaTypes[currentSopilkaType].offset) % 12]}++.svg`;
+        figcaption.innerText = `${notesTranslation[note[0].toLowerCase()][currentLang].toUpperCase()}♭+`;
+      } else {
+        img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) - 1 + sopilkaTypes[currentSopilkaType].offset) % 12]}+.svg`;
+        figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}`;
+      }
     } else if (note.endsWith("#++")) {
       img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}++.svg`;
+      figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}${note[2]}`;
+    } else if (note.endsWith("♭++")) {
+      img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) - 1 + sopilkaTypes[currentSopilkaType].offset) % 12]}++.svg`;
       figcaption.innerText = `${notesTranslation[note[0]][currentLang].toUpperCase()}${note[1]}${note[2]}`;
     } else if (note.endsWith('++')) {
       img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0]) + sopilkaTypes[currentSopilkaType].offset) % 12]}${note.substring(1)}.svg`;
@@ -489,6 +503,8 @@ function normalizeInput(input) {
   let lines = input.split("\n");
   for (let i = 0; i < lines.length; i++) {
     if (!lines[i].startsWith('---') && !lines[i].startsWith('--') && !lines[i].startsWith('-')) {
+      lines[i] = lines[i].replaceAll('б',  '♭');
+      lines[i] = lines[i].replaceAll('$',  '♭');
       for (let key in notesTranslation) {
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk, notesTranslation[key].en);
         lines[i] = lines[i].replaceAll(notesTranslation[key].uk.toUpperCase(), notesTranslation[key].en.toUpperCase());
