@@ -1,6 +1,7 @@
 // variables
 let tunes;
 let languages;
+let fonts;
 let notesTranslation;
 let contentTranslation;
 let infoSlides;
@@ -11,6 +12,7 @@ let notes = document.getElementById("notes");
 let tabs = document.getElementById("tabs");
 let tune = document.getElementById("tune");
 let lang = document.getElementById("lang");
+let font = document.getElementById("font");
 let sopilkaType = document.getElementById("sopilkaType");
 let slogan = document.getElementById("slogan");
 let btnSave = document.getElementById("btnSave");
@@ -33,6 +35,7 @@ let labelBugreport = document.getElementById("bugreport");
 let requaireLogin = document.getElementById("requaireLogin");
 let labelTune = document.querySelectorAll("[for='tune']")[0];
 let labelLang = document.querySelectorAll("[for='lang']")[0];
+let labelFont = document.querySelectorAll("[for='font']")[0];
 let labelSopilkaType = document.querySelectorAll("[for='sopilkaType']")[0];
 let labelSpacing = document.querySelectorAll("[for='spacing']")[0];
 let labelWhiteBg = document.querySelectorAll("[for='whiteBg']")[0];
@@ -46,6 +49,7 @@ let optionScaleB;
 let optionScaleE;
 let optionOwnTune;
 let currentLang = 'uk';
+let currentFont = 'default';
 let currentSpacing = 4;
 let currentName = '';
 let currentSopilkaType = 'sopranoC';
@@ -72,6 +76,7 @@ async function getData(url) {
   response = await response.json();
   tunes = response.tunes;
   languages = response.languages;
+  fonts = response.fonts;
   notesTranslation = response.notesTranslation;
   contentTranslation = response.contentTranslation;
   infoSlides = response.infoSlides;
@@ -81,6 +86,7 @@ async function getData(url) {
 
   addTuneOptions();
   addLangOptions();
+  addFontOptions();
   addSopilkaTypeOptions();
   addInfoSlides();
 
@@ -132,6 +138,11 @@ function getSettingsFromLocalStorage() {
   if (localStorage.getItem('lang')) {
     currentLang = lang.value = localStorage.getItem('lang');
     changeLang(currentLang);
+  }
+
+  if (localStorage.getItem('font')) {
+    currentFont = font.value = localStorage.getItem('font');
+    changeFont(currentFont);
   }
 
   switch (localStorage.getItem('saveTo')) {
@@ -272,6 +283,7 @@ function elementCreation(note) {
   } else if (note.startsWith('title_')) {
     let h2 = document.createElement('h2');
     h2.textContent = `${note.replace('title_', '')}`;
+    h2.setAttribute("class", `font-${currentFont}`);
     tabs.appendChild(h2);
   } else if (note.startsWith('subtitle_')) {
     let h3 = document.createElement('h3');
@@ -286,7 +298,7 @@ function elementCreation(note) {
     figure.setAttribute("class", `spacing-${currentSpacing}`);
     let img = document.createElement('img');
     let figcaption = document.createElement('figcaption');
-    figcaption.setAttribute("class", `lang-${currentLang}${localStorage.getItem('showNotes') ? ' invisible' : ''}`);
+    figcaption.setAttribute("class", `lang-${currentLang}${localStorage.getItem('showNotes') ? ' invisible' : ''} font-${currentFont}`);
     if (note.endsWith("#")) {
       img.src = `./img/${sopilkaTypes.sopranoC.notes[(sopilkaTypes.sopranoC.notes.indexOf(note[0] + "_sharp") + sopilkaTypes[currentSopilkaType].offset) % 12]}.svg`;
       figcaption.innerText = `${notesTranslation[note[0]][currentLang]}#`;
@@ -387,6 +399,15 @@ function addLangOptions() {
   }
 }
 
+function addFontOptions() {
+  for (let key in fonts) {
+    let option = document.createElement('option');
+    option.setAttribute("value", key);
+    option.textContent = fonts[key][currentLang];
+    font.appendChild(option);
+  }
+}
+
 function addSopilkaTypeOptions() {
   for (let key in sopilkaTypes) {
     let option = document.createElement('option');
@@ -413,6 +434,7 @@ function changeLang(newLang) {
   labelFeedback.innerHTML = contentTranslation[labelFeedback.id][currentLang];
   labelBugreport.innerHTML = contentTranslation[labelBugreport.id][currentLang];
   labelLang.innerText = contentTranslation[labelLang.getAttribute('for')][currentLang];
+  labelFont.innerText = contentTranslation[labelFont.getAttribute('for')][currentLang];
   labelSpacing.innerText = contentTranslation[labelSpacing.getAttribute('for')][currentLang];
   labelWhiteBg.innerText = contentTranslation[labelWhiteBg.getAttribute('for')][currentLang];
   labelShowNotesSwitch.innerText = contentTranslation[labelShowNotesSwitch.getAttribute('for')][currentLang];
@@ -431,6 +453,12 @@ function changeLang(newLang) {
   for (i = 0; i < sopilkaType.length; i++) {
     sopilkaType[i].innerText = sopilkaTypes[sopilkaType[i].value].name[currentLang];
   }
+}
+
+function changeFont(newFont) {
+  currentFont = newFont;
+  localStorage.setItem("font", currentFont);
+  showTabs(notes.value);
 }
 
 function changeSopilkaType(type) {
