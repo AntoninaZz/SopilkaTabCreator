@@ -257,9 +257,9 @@ function showTabs(notes) {
       case 'b':
         if ((notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' && notes[i + 2] == '+' && notes[i + 3] == '+') || (notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭' && notes[i + 2] == '+' && notes[i + 3] == '+')) {
           elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}${notes[++i]}`);
-        } else if (((notes[i + 1] == '+' || notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#') && notes[i + 2] == '+') || (notes[i + 1] == '+' || notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭' && notes[i + 2] == '+')) {
+        } else if ((notes[i + 1] == '+' || notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' || notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭') && notes[i + 2] == '+') {
           elementCreation(`${notes[i]}${notes[++i]}${notes[++i]}`);
-        } else if ((notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && notes[i + 1] == '#' || notes[i + 1] == '+') || (notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && notes[i + 1] == '♭' || notes[i + 1] == '+')) {
+        } else if ((notes[i] !== 'b' && notes[i] !== 'e' && notes[i] !== 'B' && notes[i] !== 'E' && (notes[i + 1] == '#' || notes[i + 1] == '+')) || (notes[i] !== 'c' && notes[i] !== 'f' && notes[i] !== 'C' && notes[i] !== 'F' && (notes[i + 1] == '♭' || notes[i + 1] == '+'))) {
           if (notes[i] == notes[i].toUpperCase()) {
             elementCreation(`${notes[i].toLowerCase()}${notes[++i]}+`);
           } else {
