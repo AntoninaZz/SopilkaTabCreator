@@ -88,6 +88,16 @@
         "uk": "укр",
         "en": "eng"
     },
+    "fonts": {
+        "default": {
+            "uk": "Звичайний",
+            "en": "Default"
+        },
+        "namu": {
+            "uk": "Namu",
+            "en": "Namu"
+        }
+    },
     "notesTranslation": {
         "c": {
             "uk": "до",
@@ -172,6 +182,10 @@
         "lang": {
             "uk": "Мова",
             "en": "Lang"
+        },
+        "font": {
+            "uk": "Шрифт",
+            "en": "Font"
         },
         "spacing": {
             "uk": "Проміжки",
